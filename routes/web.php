@@ -26,10 +26,10 @@ Route::get('/', function () {
     // return auth()->user();
     return view('pages.dashboard');
 });
-Route::get('/userlist', function () {    return view('pages.userList');});
+Route::get('/user-list', function () {    return view('pages.userList');})->name('pages.user.list');
 
-Route::get('/pi-create', function () {    return view('pages.piCreate');});
-Route::get('/login', function () {    return view('components.login');});
+Route::get('/pi-create', function () {    return view('pages.piCreate');})->name('pages.pi.create');
+Route::get('/login', function () {    return view('components.login');})->name('pages.login');
 
 
 
