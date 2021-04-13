@@ -26,7 +26,9 @@ Route::get('/', function () {
     // return auth()->user();
     return view('pages.dashboard');
 });
+Route::get('/userlist', function () {    return view('pages.userList');});
 
+Route::get('/pi-create', function () {    return view('pages.piCreate');});
 Route::get('/login', function () {    return view('components.login');});
 
 
