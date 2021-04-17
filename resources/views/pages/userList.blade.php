@@ -19,37 +19,56 @@
                     <div class="modal fade text-left" id="adduser" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel1" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel1">Basic Modal</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="basicInput">Basic Input</label>
-                                        <input type="text" class="form-control mb-2" id="basicInput" placeholder="Enter email">
-                                        <label for="basicInput">Basic Input</label>
-                                        <input type="text" class="form-control mb-2" id="basicInput" placeholder="Enter email">
 
+                            <form action="{{ route('pages.add.user') }}" method="POST" class=" ajaxForm">
+                            @csrf
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel1">Add user</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="basicInput">Full name</label>
+                                            <input type="text" name="name" class="form-control mb-2" id="basicInput" placeholder="Enter full name">
+                                            <small class="w-100 help-block text-danger error-name"></small><br />
+                                            <label for="basicInput">Username</label>
+                                            <input type="text" name="username" class="form-control mb-2" id="basicInput" placeholder="Enter username">
+                                            <small class="w-100 help-block text-danger error-username"></small><br />
+                                            
+                                            <label for="basicInput">Roles</label>
+                                            <select name="roles[]" id="" multiple class="form-control mb-2">
+                                                <option value="">Select one or more</option>
+                                                @forelse ($roles as $role)
+                                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                                @empty
+                                                    
+                                                @endforelse
+                                            </select>
+                                            <small class="w-100 help-block text-danger error-roles"></small><br />
+                                            
 
-                                        <label for="basic-default-password1">Password</label>
-                                        <div class="input-group input-group-merge form-password-toggle mb-2">
-                                            <input type="password" class="form-control" id="basic-default-password1"
-                                                placeholder="Your Password" aria-describedby="basic-default-password1" />
-                                            <div class="input-group-append">
-                                                <span class="input-group-text cursor-pointer"><i
-                                                        data-feather="eye"></i></span>
+                                            <label for="basic-default-password1">Password</label>
+                                            <div class="input-group input-group-merge form-password-toggle mb-2">
+                                                <input type="password" name="password" class="form-control" id="basic-default-password1"
+                                                    placeholder="Your Password" aria-describedby="basic-default-password1" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer"><i
+                                                            data-feather="eye"></i></span>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <small class="w-100 help-block text-danger error-password"></small><br />
 
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-relief-success">َAdd</button>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-relief-success" data-dismiss="modal">Accept</button>
-                                </div>
-                            </div>
+                                
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -61,30 +80,34 @@
                             <tr>
                                 <th>full name</th>
                                 <th>username</th>
+                                <th>roles</th>
                                 <th>created at</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @forelse ($users as $user)
+                                <tr>
 
-                                <td>amin karami</td>
+                                    <td>{{$user->name}}</td>
 
-                                <td><span class="badge badge-pill badge-light-info">amnkarim</span></td>
-                                <td>
-                                    22/9/2020
-                                </td>
-                            </tr>
-
-                            <tr>
-
-                                <td>amin karami</td>
-
-                                <td><span class="badge badge-pill badge-light-info">amnkarim</span></td>
-                                <td>
-                                    22/9/2020
-                                </td>
-                            </tr>
+                                    <td><span class="badge badge-pill badge-light-info">{{$user->username}}</span></td>
+                                    <td>
+                                        @forelse ($user->roles as $role)
+                                        <span class="badge badge-primary">{{$role->name}}</span>
+                                            
+                                        @empty
+                                            
+                                        @endforelse
+                                    </td>
+                                    <td>
+                                        {{($user->created_at)->format('Y-m-d')}}
+                                    </td>
+                                </tr>
+                            @empty
+                                
+                            @endforelse
+                            
                         </tbody>
                     </table>
                 </div>

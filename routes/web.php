@@ -24,9 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('pages.dashboard');
     })->name('pages.dashboard');
-    Route::get('/user-list', function () {
-        return view('pages.userList');
-    })->name('pages.user.list');
+
+    Route::get('/user-list', 'UsersController@users')->name('pages.user.list');
+    Route::post('/add-user', 'UsersController@addUser')->name('pages.add.user');
 
     Route::get('/pi-create', function () {
         return view('pages.piCreate');

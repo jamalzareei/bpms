@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ class UsersController extends Controller
             'password' => "required"
         ]);
 
-        
+
         $userdata = array(
             'username'     => $request->username,
             'password'  => $request->password
@@ -55,7 +56,7 @@ class UsersController extends Controller
         // attempt to do the login
         if (Auth::attempt($userdata, true)) {
             // return auth()->user();
-            
+
             session()->put('noty', [
                 'title' => '',
                 'message' => 'Login Successful.',
@@ -77,5 +78,55 @@ class UsersController extends Controller
             'data' => $request,
         ], 200);
         // return $request;
+    }
+
+    public function users(Request $request)
+    {
+        $users = User::with('roles')->get();
+
+        $roles = Role::all();
+
+        // return $users;
+        return view('pages.userList',[
+            'title' => 'لیست کاربران',
+            'users' => $users,
+            'roles' => $roles,
+        ]);
+    }
+
+    public function addUser(Request $request)
+    {
+        # code...
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username',
+            'password' => 'required',
+            'roles' => 'required',
+            'roles.*' => 'required',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+        ]);
+
+        if($request->roles){
+            $user->roles()->sync($request->roles);
+        }
+
+        session()->put('noty', [
+            'title' => '',
+            'message' => 'Add User Successful.',
+            'status' => 'success',
+            'data' => $user,
+        ]);
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Add User Successful.',
+            'data' => $user,
+            'autoRedirect' => route('pages.user.list')
+        ], 200);
     }
 }

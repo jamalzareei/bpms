@@ -15,12 +15,14 @@ class UserSeeder extends Seeder
     {
         //
         \App\Models\User::create([
+            'name' => 'jamal zareie',
             'username' => 'jamalzareie',
             'password' => bcrypt('1430548'),
         ]);
 
         
         \App\Models\User::create([
+            'name' => 'amin karami',
             'username' => 'amin',
             'password' => bcrypt('1234'),
         ]);
