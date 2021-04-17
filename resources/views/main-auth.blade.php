@@ -35,6 +35,17 @@
     @include('components/footer')
     
       @yield('footer')
+      
+    <script src="{{ asset('js/script.js') }}"></script>
+
+    <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
+    <script>
+      // toastr.success('message', 'title', { "timeOut": 50000, "closeButton": true, positionClass: 'toast-top-right', containerId: 'toast-top-right' })
+      @if(session('noty'))
+        messageToast("{!! session('noty')['title'] !!}", "{!! session('noty')['message'] !!}", "{!! session('noty')['status'] !!}", 5000)
+        <?php session()->forget('noty') ?>
+        @endif
+    </script>
 </body>
 
 

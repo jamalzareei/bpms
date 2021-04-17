@@ -15,37 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // $user = User::create([
-    //     'name' => 'jamal', 
-    //     'email' => 'admin@admin.com',  
-    //     'password' => bcrypt('1430548')
-    // ]);
-    // $user = User::find(1);
-    // Auth::login($user);
-    // return auth()->user();
-    return view('pages.dashboard');
+
+Route::get('/login', 'UsersController@login')->name('login');
+Route::post('/login', 'UsersController@loginUser')->name('login.user.post');
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/', function () {
+        return view('pages.dashboard');
+    })->name('pages.dashboard');
+    Route::get('/user-list', function () {
+        return view('pages.userList');
+    })->name('pages.user.list');
+
+    Route::get('/pi-create', function () {
+        return view('pages.piCreate');
+    })->name('pages.pi.create');
+
+
+
+    Route::get('user/create', 'UsersController@create')->name('user.create');
+
+    // Route::post('user/login', 'UsersController@login')->name('user.login');
+
+    Route::get('logout', function () {
+        auth()->logout();
+
+        return redirect()->route('login');
+    })->name('log.out');
+
 });
-Route::get('/user-list', function () {    return view('pages.userList');})->name('pages.user.list');
-
-Route::get('/pi-create', function () {    return view('pages.piCreate');})->name('pages.pi.create');
-Route::get('/login', function () {    return view('components.login');})->name('pages.login');
-
-
-
-Route::get('user/create', 'UsersController@create')->name('user.create');
-
-Route::post('user/login', 'UsersController@login')->name('user.login');
-
-
-
-
-
-
-// Route::get('/register', function () {    return view('components.register');});
-// Route::get('/forget-password', function () {    return view('components.forgetPassword');});
-// Route::get('/reset-password', function () {    return view('components.resetPassword');});
-
-
-// Route::get('/', 'HomeController')->name('index');
-// Route::get('/login', 'HomeController')->name('login');

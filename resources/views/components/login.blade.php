@@ -53,11 +53,12 @@
                                 <h4 class="card-title mb-1">Welcome to CeramPakhsh</h4>
                                 <p class="card-text mb-2">Please sign-in to your account and start the Export</p>
 
-                                <form class="auth-login-form mt-2" action="{{ route('user.login') }}" method="POST">
+                                <form class="auth-login-form mt-2 ajaxForm" action="{{ route('login.user.post') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="username" class="form-label">Email</label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="john@example.com" aria-describedby="username" tabindex="1" autofocus />
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="cerampakhsh" aria-describedby="username" tabindex="1" autofocus />
+                                        <small class="w-100 help-block text-danger error-username"></small>
                                     </div>
 
                                     <div class="form-group">
@@ -72,6 +73,7 @@
                                             <div class="input-group-append">
                                                 <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                             </div>
+                                            <small class="w-100 help-block text-danger error-password"></small>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -80,7 +82,7 @@
                                             <label class="custom-control-label" for="remember-me"> Remember Me </label>
                                         </div>
                                     </div>
-                                    <button class="btn btn-info btn-block" tabindex="4">Sign in</button>
+                                    <button type="submit" class="btn btn-info btn-block" tabindex="4">Sign in</button>
                                 </form>
 
                                 {{-- <p class="text-center mt-2">
