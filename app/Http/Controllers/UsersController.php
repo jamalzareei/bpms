@@ -50,7 +50,8 @@ class UsersController extends Controller
 
         $userdata = array(
             'username'     => $request->username,
-            'password'  => $request->password
+            'password'  => $request->password,
+            'deleted_at' => null
         );
         // return $userdata;
         // attempt to do the login
