@@ -22,13 +22,24 @@
                         data-i18n="Dashboards">Dashboards</span><span
                         class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="{{ route('pages.user.list') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                data-i18n="Analytics">Users List</span></a>
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('pages.user.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Users List</span>
+                        </a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="{{ route('pages.pi.create') }}"><i
-                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                data-i18n="Analytics">Pi Create</span></a>
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('pages.role.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Roles List</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('pages.pi.create') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Pi Create</span>
+                        </a>
                     </li>
                     <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i
                         data-feather="circle"></i><span class="menu-item text-truncate"

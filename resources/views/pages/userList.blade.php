@@ -1,6 +1,7 @@
 @extends('main')
 @section('header')
-
+{{-- <link rel="stylesheet" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}"> --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @stop
 @section('content')
 
@@ -82,28 +83,37 @@
                                 <th>username</th>
                                 <th>roles</th>
                                 <th>created at</th>
-
+                                <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
+                            <form class="ajaxForm" action="{{ route('pages.update.user', ['user_id'=>$user->id]) }}" method="post">
+                                @csrf
                                 <tr>
 
                                     <td>{{$user->name}}</td>
 
                                     <td><span class="badge badge-pill badge-light-info">{{$user->username}}</span></td>
                                     <td>
-                                        @forelse ($user->roles as $role)
-                                        <span class="badge badge-primary">{{$role->name}}</span>
-                                            
-                                        @empty
-                                            
-                                        @endforelse
+                                        <select name="roles[]" multiple class="js-example-basic-multipl" id="">
+                                        
+                                            @forelse ($roles as $role)
+                                                <option value="{{$role->id}}" {{(in_array($role->id,(array) $user->roles->pluck('id')->toArray())) ? 'selected' : ''}}>{{$role->name}}</option>
+                                            @empty
+                                                
+                                            @endforelse
+                                        </select>
                                     </td>
                                     <td>
                                         {{($user->created_at)->format('Y-m-d')}}
                                     </td>
+                                    
+                                    <td>
+                                        <button type="submit" class="btn btn-relief-success"><i class="fas fa-edit"></i></button>
+                                    </td>
                                 </tr>
+                            </form>
                             @empty
                                 
                             @endforelse
@@ -119,4 +129,12 @@
 @stop
 
 @section('footer')
+{{-- <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="">
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 @stop

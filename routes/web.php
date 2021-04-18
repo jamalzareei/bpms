@@ -27,6 +27,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user-list', 'UsersController@users')->name('pages.user.list');
     Route::post('/add-user', 'UsersController@addUser')->name('pages.add.user');
+    Route::post('/update-user/{user_id}', 'UsersController@updateUser')->name('pages.update.user');
+
+    
+    Route::get('/roles-list', 'RolesController@roles')->name('pages.role.list');
+    Route::post('/add-role', 'RolesController@addRole')->name('pages.add.role');
 
     Route::get('/pi-create', function () {
         return view('pages.piCreate');

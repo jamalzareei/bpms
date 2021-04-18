@@ -87,9 +87,9 @@ class UsersController extends Controller
 
         $roles = Role::all();
 
-        // return $users;
+        // return $users[0]->roles->pluck('id')->toArray();
         return view('pages.userList',[
-            'title' => 'لیست کاربران',
+            'title' => 'Users list',
             'users' => $users,
             'roles' => $roles,
         ]);
@@ -128,6 +128,27 @@ class UsersController extends Controller
             'message' => 'Add User Successful.',
             'data' => $user,
             'autoRedirect' => route('pages.user.list')
+        ], 200);
+    }
+
+    public function updateUser(Request $request, $user_id)
+    {
+        # code...
+        // return $request;
+        
+        $request->validate([
+            'roles.*' => 'required',
+        ]);
+        $user = User::find($user_id);
+
+        
+        if($request->roles){
+            $user->roles()->sync($request->roles);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User rolse updated.',
+            'data' => $user,
         ], 200);
     }
 }
