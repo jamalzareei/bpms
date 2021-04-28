@@ -33,6 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/roles-list', 'RolesController@roles')->name('pages.role.list');
     Route::post('/add-role', 'RolesController@addRole')->name('pages.add.role');
 
+    
+    Route::get('/links-list', 'LinksController@links')->name('pages.link.list');
+    Route::post('/add-link', 'LinksController@addLink')->name('pages.add.link');
+    Route::post('/update-link/{link_id}', 'LinksController@updateLink')->name('pages.update.link');
+
     Route::get('/pi-create', function () {
         return view('pages.piCreate');
     })->name('pages.pi.create');

@@ -10,36 +10,32 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Users List</h4>
+                    <h4 class="card-title">{{ $title }}</h4>
                     <button type="button" class="btn btn-outline-primary waves-effect" data-toggle="modal"
-                        data-target="#adduser">
-                        <i data-feather='plus-square'></i> <span>add a new user</span>
+                        data-target="#addlink">
+                        <i data-feather='plus-square'></i> <span>add a new Link</span>
                     </button>
 
                     <!-- Modal -->
-                    <div class="modal fade text-left" id="adduser" tabindex="-1" role="dialog"
+                    <div class="modal fade text-left" id="addlink" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel1" aria-hidden="true">
                         <div class="modal-dialog" role="document">
 
-                            <form action="{{ route('pages.add.user') }}" method="POST" class=" ajaxForm">
+                            <form action="{{ route('pages.add.link') }}" method="POST" class=" ajaxForm">
                                 @csrf
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel1">Add user</h4>
+                                        <h4 class="modal-title" id="myModalLabel1">Add link</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="basicInput">Full name</label>
-                                            <input type="text" name="name" class="form-control mb-2" id="basicInput"
-                                                placeholder="Enter full name">
+                                            <label for="name">Name</label>
+                                            <input type="text" name="name" class="form-control mb-2" id="name"
+                                                placeholder="Enter Name">
                                             <small class="w-100 help-block text-danger error-name"></small><br />
-                                            <label for="basicInput">Username</label>
-                                            <input type="text" name="username" class="form-control mb-2" id="basicInput"
-                                                placeholder="Enter username">
-                                            <small class="w-100 help-block text-danger error-username"></small><br />
 
                                             <label for="basicInput">Roles</label>
                                             <select name="roles[]" class="js-example-basic-multiple select2" data-placeholder="Select One or more" multiple="multiple" id="roles-form" >
@@ -51,18 +47,34 @@
                                             </select>
                                             <small class="w-100 help-block text-danger error-roles"></small><br />
 
+                                            <label for="place">Place</label>
+                                            <select name="place" class="form-control" data-placeholder="Select One or more"
+                                                id="place">
+                                                <option value="MENU">MENU</option>
+                                                <option value="HEADER">HEADER</option>
+                                                <option value="FOOTER">FOOTER</option>
+                                            </select>
+                                            <small class="w-100 help-block text-danger error-Place"></small><br />
 
-                                            <label for="basic-default-password1">Password</label>
-                                            <div class="input-group input-group-merge form-password-toggle mb-2">
-                                                <input type="password" name="password" class="form-control"
-                                                    id="basic-default-password1" placeholder="Your Password"
-                                                    aria-describedby="basic-default-password1" />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text cursor-pointer"><i
-                                                            data-feather="eye"></i></span>
-                                                </div>
-                                            </div>
-                                            <small class="w-100 help-block text-danger error-password"></small><br />
+                                            <label for="icon-html">icon html</label>
+                                            <input type="text" name="icon" class="form-control mb-2" id="icon-html"
+                                                placeholder="Enter icon html">
+                                            <small class="w-100 help-block text-danger error-icon"></small><br />
+
+                                            <label for="slug_select">route</label>
+                                            <select name="route" class="form-control" id="slug_select">
+                                                @forelse ($routes as $key => $route )
+                                                    <option value="{{ $route->getName() }}"
+                                                        link_page="{{ $route->uri }}">
+                                                        {{ $route->uri }} ({{ $route->getName() }})</option>
+                                                @empty
+
+                                                @endforelse
+                                            </select>
+
+                                            <small class="w-100 help-block text-danger error-route"></small><br />
+
+                                            <input type="hidden" name="link_page" value="">
 
                                         </div>
                                     </div>
@@ -82,30 +94,27 @@
                         <thead>
                             <tr>
                                 <th>full name</th>
-                                <th>username</th>
+                                <th>linkname</th>
                                 <th>roles</th>
                                 <th>created at</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($users as $user)
-                                <form class="ajaxForm" action="{{ route('pages.update.user', ['user_id' => $user->id]) }}"
-                                    method="post">
+                            @forelse ($links as $link)
+                                <form class="ajaxForm" action="{{ route('pages.update.link', ['link_id' => $link->id]) }}" method="post">
                                     @csrf
                                     <tr>
-
-                                        <td>{{ $user->name }}</td>
-
-                                        <td><span class="badge badge-pill badge-light-info">{{ $user->username }}</span>
+                                        <td>{{ $link->name }}</td>
+                                        <td><span class="badge badge-pill badge-light-info">{{ $link->url }}</span>
                                         </td>
                                         <td>
                                             <select name="roles[]" multiple="multiple" class="js-example-basic-multipl select2"
-                                                id="roles-loop-{{ $user->id }}" data-placeholder="Select One or more">
+                                                id="roles-loop-{{ $link->id }}" data-placeholder="Select One or more">
 
                                                 @forelse ($roles as $role)
                                                     <option value="{{ $role->id }}"
-                                                        {{ in_array($role->id, (array) $user->roles->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                        {{ in_array($role->id, (array) $link->roles->pluck('id')->toArray()) ? 'selected' : '' }}>
                                                         {{ $role->name }}</option>
                                                 @empty
 
@@ -113,7 +122,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            {{ $user->created_at->format('Y-m-d') }}
+                                            {{ $link->created_at->format('Y-m-d') }}
                                         </td>
 
                                         <td>
@@ -137,15 +146,24 @@
 @stop
 
 @section('footer')
-    {{-- <script src="{{asset('app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script> --}}
 
+    <script>
+        $(document).on('change', '#slug_select', function() {
+            let link_page = $('option:selected', this).attr('link_page');
+
+            $('[name="link_page"]').val(link_page)
+        });
+
+    </script>
     <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 
     <script src="{{ asset('app-assets/js/scripts/forms/form-select2.js') }}"></script>
     <script src="">
         $(document).ready(function() {
+
             $('.js-example-basic-single').select2();
         });
 
     </script>
+
 @stop

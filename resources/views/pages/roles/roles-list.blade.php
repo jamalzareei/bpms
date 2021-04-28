@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-relief-success">َAdd</button>
+                                        <button type="submit" class="btn btn-relief-success">Add</button>
                                     </div>
                                 </div>
                                 

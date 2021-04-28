@@ -36,6 +36,13 @@
                     </li>
                     
                     <li>
+                        <a class="d-flex align-items-center" href="{{ route('pages.link.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Links List</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a class="d-flex align-items-center" href="{{ route('pages.pi.create') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item text-truncate" data-i18n="Analytics">Pi Create</span>

@@ -19,4 +19,16 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    
+    /**
+     * The users that belong to the Role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function links()
+    {
+        return $this->belongsToMany(Link::class);
+    }
+
 }

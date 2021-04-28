@@ -21,6 +21,7 @@ class CreateLinksTable extends Migration
             $table->string('place_link', 191)->nullable();
             $table->string('route_name', 191)->nullable();
             $table->text('url')->nullable();
+            $table->text('icon')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

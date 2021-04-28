@@ -88,7 +88,7 @@ class UsersController extends Controller
         $roles = Role::all();
 
         // return $users[0]->roles->pluck('id')->toArray();
-        return view('pages.userList',[
+        return view('pages.users.users-list',[
             'title' => 'Users list',
             'users' => $users,
             'roles' => $roles,
