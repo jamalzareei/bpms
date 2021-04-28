@@ -110,6 +110,6 @@ a {
     overflow: hidden;
 } */
 
-.table-responsive .responsive-overflow {
+.table-responsive.responsive-overflow {
     overflow-x: inherit !important;
 }

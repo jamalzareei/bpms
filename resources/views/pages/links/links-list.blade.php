@@ -1,7 +1,10 @@
 @extends('main')
 @section('header')
     {{-- <link rel="stylesheet" href="{{asset('app-assets/vendors/css/forms/select/select2.min.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}"> --}}
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @stop
 @section('content')
 
@@ -38,7 +41,8 @@
                                             <small class="w-100 help-block text-danger error-name"></small><br />
 
                                             <label for="basicInput">Roles</label>
-                                            <select name="roles[]" class="js-example-basic-multiple select2" data-placeholder="Select One or more" multiple="multiple" id="roles-form" >
+                                            <select name="roles[]" class="js-example-basic-multiple select2"
+                                                data-placeholder="Select One or more" multiple="multiple" id="roles-form">
                                                 @forelse ($roles as $role)
                                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                                 @empty
@@ -89,28 +93,35 @@
                 </div>
 
 
-                <div class="table-responsive">
+                <div class="table-responsive responsive-overflow">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>full name</th>
                                 <th>linkname</th>
-                                <th>roles</th>
                                 <th>created at</th>
-                                <th>ACTION</th>
+                                <th> ACTION roles</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($links as $link)
-                                <form class="ajaxForm" action="{{ route('pages.update.link', ['link_id' => $link->id]) }}" method="post">
-                                    @csrf
-                                    <tr>
-                                        <td>{{ $link->name }}</td>
-                                        <td><span class="badge badge-pill badge-light-info">{{ $link->url }}</span>
-                                        </td>
-                                        <td>
-                                            <select name="roles[]" multiple="multiple" class="js-example-basic-multipl select2"
-                                                id="roles-loop-{{ $link->id }}" data-placeholder="Select One or more">
+                                <tr>
+                                    <td>{{ $link->name }}</td>
+                                    <td><span class="badge badge-pill badge-light-info">{{ $link->url }}</span>
+                                    </td>
+                                    <td>
+                                        {{ $link->created_at->format('Y-m-d') }}
+                                    </td>
+
+                                    <td>
+                                        <form class="ajaxForm"
+                                            action="{{ route('pages.update.link', ['link_id' => $link->id]) }}"
+                                            id="form-{{ $link->id }}" method="post">
+                                            @csrf
+                                            <select name="roles[]" multiple="multiple"
+                                                class="js-example-basic-multipl select2"
+                                                id="roles-loop-{{ $link->id }}" data-placeholder="Select One or more"
+                                                for="form-{{ $link->id }}">
 
                                                 @forelse ($roles as $role)
                                                     <option value="{{ $role->id }}"
@@ -120,17 +131,11 @@
 
                                                 @endforelse
                                             </select>
-                                        </td>
-                                        <td>
-                                            {{ $link->created_at->format('Y-m-d') }}
-                                        </td>
-
-                                        <td>
-                                            <button type="submit" class="btn btn-relief-success"><i
-                                                    class="fas fa-edit"></i></button>
-                                        </td>
-                                    </tr>
-                                </form>
+                                            <button type="submit" class="btn btn-relief-success"
+                                                for="form-{{ $link->id }}"><i class="fas fa-edit"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @empty
 
                             @endforelse
@@ -155,7 +160,7 @@
         });
 
     </script>
-    <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+    {{-- <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
 
     <script src="{{ asset('app-assets/js/scripts/forms/form-select2.js') }}"></script>
     <script src="">
@@ -163,6 +168,17 @@
 
             $('.js-example-basic-single').select2();
         });
+
+    </script> --}}
+
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+    <script>
+        $('select').selectpicker();
 
     </script>
 

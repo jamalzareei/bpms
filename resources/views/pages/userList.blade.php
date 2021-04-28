@@ -77,7 +77,7 @@
                 </div>
 
 
-                <div class="table-responsive">
+                <div class="table-responsive responsive-overflow">
                     <table class="table table-hover">
                         <thead>
                             <tr>
