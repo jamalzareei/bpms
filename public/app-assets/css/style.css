@@ -109,3 +109,7 @@ a {
 /* .card {
     overflow: hidden;
 } */
+
+.table-responsive .responsive-overflow {
+    overflow-x: inherit !important;
+}
