@@ -6,7 +6,7 @@ $(() => {
     });
     // $('ul.menu-content a').each()
 
-    $("ul.menu-content a").each(function(index) {
+    $("li.nav-item a").each(function(index) {
         // console.log(index + ": " + $(this).text());
         if (window.location.href === $(this).attr('href')) {
             $(this).parent().addClass('active hhhh');

@@ -11,6 +11,8 @@ class Customer extends Model
     use HasFactory;
     use Sluggable;
 
+    protected $guarded = [];
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -20,7 +22,7 @@ class Customer extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

@@ -9,7 +9,9 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Product extends Model
 {
     use HasFactory;
-    use Sluggable;
+    use sluggable;
+
+    protected $guarded = [];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -20,7 +22,7 @@ class Product extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

@@ -38,9 +38,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-link', 'LinksController@addLink')->name('pages.add.link');
     Route::post('/update-link/{link_id}', 'LinksController@updateLink')->name('pages.update.link');
 
-    Route::get('/pi-create', function () {
-        return view('pages.piCreate');
-    })->name('pages.pi.create');
+    Route::get('/pi-create', 'PisController@addPi')->name('pages.pi.create');
+
+    Route::get('/customers-list', 'CustomersController@listCustomers')->name('pages.customers.list');
+    Route::post('/customer-create', 'CustomersController@addCustomer')->name('pages.customer.create');
+    Route::post('/update-customer/{customer_id}', 'CustomersController@updateCustomer')->name('pages.customer.update');
+
+    Route::get('/product-list', 'ProductsController@listProducts')->name('pages.products.list');
+    Route::post('/product-create', 'ProductsController@updateLink')->name('pages.product.create');
 
 
 
