@@ -15,7 +15,7 @@ class CreatePisTable extends Migration
     {
         Schema::create('pis', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable();
+            $table->string('code')->unique();
             $table->bigInteger('user_id')->nullable();
             $table->timestamp('issud_at');
             $table->timestamp('confirm_at');

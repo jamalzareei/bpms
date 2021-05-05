@@ -20,11 +20,6 @@ class Pi extends Model
         return $this->belongsToMany(Product::class, 'pi_product');
     }
 
-    // public function products()
-    // {
-    //     return $this->belongsToMany('App\Models\Product');
-    // }
-
     /**
      * The customers that belong to the Pi
      *
@@ -35,10 +30,5 @@ class Pi extends Model
         return $this->belongsToMany(Customer::class, 'customer_pi', 'pi_id', 'customer_id');
     }
 
-
-    // public function customers()
-    // {
-    //     return $this->belongsToMany('App\Models\Customer');
-    // }
 
 }

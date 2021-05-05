@@ -39,7 +39,7 @@ class PisController extends Controller
         # code...
         // return $request;
         $request->validate([
-            'code' => 'required',
+            'code' => 'required|unique:pis,code',
             'booking' => 'required|numeric',
             'confirm_at' => 'required',
             'issud_at' => 'required',
@@ -78,7 +78,11 @@ class PisController extends Controller
         # code...
         $pi = Pi::find($id);
 
-        return $pi;
+        // return $pi;
+        return view('pages.pis.pi-show', [
+            'title' => 'PI details',
+            'pi' => $pi,
+        ]);
     }
 
     public function addCustomersOrProducts(Request $request)

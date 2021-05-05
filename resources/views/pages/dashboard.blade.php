@@ -16,19 +16,19 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>sappliam</th>
+                                <th>Suppliers</th>
 
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($customers as $customer)
                             <tr>
-                                <td>novin ceram</td>
+                                <td>{{$customer->name}}</td>
                             </tr>
-                            <tr>
-                                <td>ceram negar</td>
-                            </tr>
-                            <tr></tr>
-                            <tr></tr>
+                            @empty
+                                
+                            @endforelse
+                            
                         </tbody>
                     </table>
                 </div>
@@ -63,10 +63,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>novin ceram</td>
-                            </tr>
-                            <tr>
-                                <td>ceram negar</td>
+                                <td>Please select one of the suppliers</td>
                             </tr>
                         </tbody>
                     </table>
@@ -85,10 +82,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>novin ceram</td>
-                            </tr>
-                            <tr>
-                                <td>ceram negar</td>
+                                <td>Please select one of the suppliers</td>
                             </tr>
                         </tbody>
                     </table>
@@ -107,14 +101,15 @@
             <p class="text-center">
                 put your PI number to folow the situations
             </p>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation ajaxForm" action="{{ route('pages.dashboard.load.pi') }}" method="POST" >
+                @csrf
                 <div class="form-row">
                     <div class="col-md-4 col-12 mb-3">
 
                     </div>
                     <div class="col-md-4 col-12 mb-3">
-                        <input type="text" class="form-control" id="validationTooltip01" placeholder="First name"
-                            value="Mark" required />
+                        <input type="text" class="form-control" id="validationTooltip01" placeholder="PI code" name="code" required />
+                        <small class="w-100 help-block text-danger error-code"></small>
                     </div>
                     <div class="col-md-4 col-12 mb-3">
                         <button class="btn btn-info" type="submit">Submit</button>

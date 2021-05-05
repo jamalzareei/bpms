@@ -21,9 +21,9 @@ Route::post('/login', 'UsersController@loginUser')->name('login.user.post');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {
-        return view('pages.dashboard');
-    })->name('pages.dashboard');
+    Route::get('/', 'DashboardController@index')->name('pages.dashboard');
+    Route::post('/load-pi', 'DashboardController@loadPi')->name('pages.dashboard.load.pi');
+    Route::get('/get-pis', 'DashboardController@getPis')->name('pages.dashboard.get.pis');
 
     Route::get('/user-list', 'UsersController@users')->name('pages.user.list');
     Route::post('/add-user', 'UsersController@addUser')->name('pages.add.user');
