@@ -120,9 +120,18 @@
                                 </form>
                             @empty
 
+                            <tr>
+                                <td colspan="5">Not Item for show</td>
+                            </tr>
                             @endforelse
-
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    {{ $customers->appends($_GET)->links() }}
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

@@ -26,4 +26,14 @@ class Product extends Model
             ]
         ];
     }
+
+    /**
+     * The pis that belong to the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pis()
+    {
+        return $this->belongsToMany(Pi::class, 'pi_product');
+    }
 }

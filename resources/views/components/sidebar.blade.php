@@ -72,6 +72,12 @@
                 <ul class="menu-content">
                     
                     <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.pis.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">List Pis </span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
                         <a class="d-flex align-items-center" href="{{ route('pages.pi.create') }}">
                             <i data-feather="circle"></i>
                             <span class="menu-item text-truncate" data-i18n="Analytics">Create Pi </span>

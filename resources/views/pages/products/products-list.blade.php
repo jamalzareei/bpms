@@ -105,9 +105,16 @@
                                 </form>
                             @empty
 
+                            <tr>
+                                <td colspan="4">Not Item for show</td>
+                            </tr>
                             @endforelse
-
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">{{ $products->appends($_GET)->links() }}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

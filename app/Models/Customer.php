@@ -26,4 +26,14 @@ class Customer extends Model
             ]
         ];
     }
+
+    /**
+     * The pis that belong to the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pis()
+    {
+        return $this->belongsToMany(Pi::class, 'customer_pi', 'customer_id', 'pi_id');
+    }
 }
