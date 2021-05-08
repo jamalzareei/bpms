@@ -88,6 +88,29 @@
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="">
                     <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="countries">countries</span>
+                    {{-- <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span> --}}
+                </a>
+                <ul class="menu-content">
+                    
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.countries.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">List countries </span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.countries.list') }}?create=true">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Create country </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a class="d-flex align-items-center" href="">
+                    <i data-feather="home"></i>
                     <span class="menu-title text-truncate" data-i18n="Customers">Customers</span>
                     {{-- <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span> --}}
                 </a>

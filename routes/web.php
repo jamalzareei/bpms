@@ -52,6 +52,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/pi-add-customers-or-products', 'PisController@addCustomersOrProducts')->name('pages.pi.add.customers.products');
     Route::get('/pi-show/{id}', 'PisController@showPi')->name('pages.pi.show');
 
+    
+    Route::get('/countries-list', 'CountriesController@countries')->name('pages.countries.list');
+    Route::post('/add-country', 'CountriesController@addCountry')->name('pages.add.country');
+    Route::post('/update-country/{country_id}', 'CountriesController@updateCountry')->name('pages.update.country');
 
     Route::get('user/create', 'UsersController@create')->name('user.create');
 

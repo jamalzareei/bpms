@@ -25,6 +25,7 @@ class PiFactory extends Factory
             //
             'code' => $this->faker->unique()->numberBetween(1, 1000), 
             'user_id' => 1, 
+            'customer_id' => 1, 
             'issud_at' => $this->faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),//->dateTime($max = 'now', $timezone = null), 
             'confirm_at' => $this->faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),//->dateTime($max = 'now', $timezone = null), 
             'producing' => $this->faker->randomNumber($nbDigits = NULL, $strict = false), 

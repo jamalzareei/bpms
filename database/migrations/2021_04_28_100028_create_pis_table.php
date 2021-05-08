@@ -17,29 +17,21 @@ class CreatePisTable extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->bigInteger('user_id')->nullable();
-            $table->timestamp('issud_at');
-            $table->timestamp('confirm_at');
-            $table->decimal('producing', 12, 2);
-            $table->decimal('stock', 12, 2);
-            $table->decimal('booking', 12, 2);
-            $table->decimal('trucks_factory', 12, 2);
-            $table->decimal('trucks_on_way', 12, 2);
-            $table->decimal('trucks_on_border', 12, 2);
-            $table->decimal('trucks_vend_on_way', 12, 2);
+            $table->bigInteger('customer_id')->index();
+            $table->timestamp('issud_at')->nullable();
+            $table->timestamp('confirm_at')->nullable();
+            $table->decimal('producing', 12, 2)->nullable();
+            $table->decimal('stock', 12, 2)->nullable();
+            $table->decimal('booking', 12, 2)->nullable();
+            $table->decimal('trucks_factory', 12, 2)->nullable();
+            $table->decimal('trucks_on_way', 12, 2)->nullable();
+            $table->decimal('trucks_on_border', 12, 2)->nullable();
+            $table->decimal('trucks_vend_on_way', 12, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
 
         
-        Schema::create('customer_pi', function (Blueprint $table) {
-            $table->bigInteger('customer_id');
-            $table->bigInteger('pi_id');
-        });
-        
-        Schema::create('pi_product', function (Blueprint $table) {
-            $table->bigInteger('pi_id');
-            $table->bigInteger('product_id');
-        });
     }
 
     /**
@@ -50,7 +42,5 @@ class CreatePisTable extends Migration
     public function down()
     {
         Schema::dropIfExists('pis');
-        Schema::dropIfExists('customer_pi');
-        Schema::dropIfExists('pi_product');
     }
 }
