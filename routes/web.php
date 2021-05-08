@@ -57,6 +57,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-country', 'CountriesController@addCountry')->name('pages.add.country');
     Route::post('/update-country/{country_id}', 'CountriesController@updateCountry')->name('pages.update.country');
 
+    
+    Route::get('/currencies-list', 'CurrenciesController@currencies')->name('pages.currencies.list');
+    Route::post('/add-currency', 'CurrenciesController@addCurrency')->name('pages.add.currency');
+    Route::post('/update-currency/{currency_id}', 'CurrenciesController@updateCurrency')->name('pages.update.currency');
+
     Route::get('user/create', 'UsersController@create')->name('user.create');
 
     // Route::post('user/login', 'UsersController@login')->name('user.login');

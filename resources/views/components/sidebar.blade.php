@@ -85,6 +85,29 @@
                     </li>
                 </ul>
             </li>
+            
+            <li class=" nav-item">
+                <a class="d-flex align-items-center" href="">
+                    <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="currencies">currencies</span>
+                </a>
+                <ul class="menu-content">
+                    
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.currencies.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">List currencies </span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.currencies.list') }}?create=true">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Create currency </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="">
                     <i data-feather="home"></i>
