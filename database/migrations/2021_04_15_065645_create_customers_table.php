@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('country_id')->nullable();
-            $table->bigInteger('customer_id')->nullable();
+            $table->bigInteger('factory_id')->nullable();
             $table->string('name', 191);
             $table->string('slug', 191);
             $table->string('code', 191);

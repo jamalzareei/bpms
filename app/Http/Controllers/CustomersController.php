@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Models\Factory;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -17,15 +18,15 @@ class CustomersController extends Controller
         $customers = Customer::paginate(50);
 
         $countries = Country::all();
-        $factory = Factory::all();
+        $factories = Factory::all();
 
 
-        // return $users[0]->roles->pluck('id')->toArray();
+        // return $customers;
         return view('pages.customers.customers-list',[
             'title' => 'Customers list',
             'customers' => $customers,
             'countries' => $countries,
-            'factory' => $factory,
+            'factories' => $factories,
         ]);
     }
 
@@ -34,17 +35,26 @@ class CustomersController extends Controller
         # code...
         // return $request;
         $request->validate([
+            'username'=> 'nullable|exists:users,username',
+            'country_id'=> 'required',
+            'factory_id'=> 'required',
             'code'=> 'required',
             'name'=> 'required',
             'tell'=> 'required|min:10',
             'address'=> 'required|min:10',
         ]);
 
+        $user = User::where('username', $request->username)->first();
+
         $customer  = Customer::create([
-            'code'=> $request->code,
-            'name'=> $request->name,
-            'tell'=> $request->tell,
-            'address'=> $request->address,
+            'user_id' => $user->id ?? null,
+            'country_id' => $request->country_id,
+            'factory_id' => $request->factory_id,
+            'name' => $request->name,
+            'code' => $request->code,
+            'tell' => $request->tell,
+            'address' => $request->address,
+
         ]);
 
         
@@ -60,15 +70,20 @@ class CustomersController extends Controller
     {
         # code...
         $request->validate([
+            'username'=> 'nullable|exists:users,username',
+            'country_id'=> 'required',
+            'factory_id'=> 'required',
             'code'=> 'required',
             'name'=> 'required',
             'tell'=> 'required|min:10',
         ]);
 
         $customer  = Customer::where('id', $customer_id)->update([
-            'code'=> $request->code,
-            'name'=> $request->name,
-            'tell'=> $request->tell,
+            'country_id' => $request->country_id,
+            'factory_id' => $request->factory_id,
+            'name' => $request->name,
+            'code' => $request->code,
+            'tell' => $request->tell,
         ]);
         
         return response()->json([

@@ -47,10 +47,17 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
+                                            
+                                            <label for="name">username</label>
+                                            <input type="text" name="username" class="form-control" id="username"
+                                                placeholder="Enter username if exists">
+                                            <small class="w-100 help-block text-danger error-username"></small><br />
+                                            
                                             <label for="name">name</label>
                                             <input type="text" name="name" class="form-control" id="name"
                                                 placeholder="Enter name">
                                             <small class="w-100 help-block text-danger error-name"></small><br />
+
                                             <label for="code">code</label>
                                             <input type="text" name="code" class="form-control" id="code"
                                                 placeholder="Enter code">
@@ -60,6 +67,29 @@
                                             <input type="text" name="tell" class="form-control" id="tell"
                                                 placeholder="Enter tell">
                                             <small class="w-100 help-block text-danger error-tell"></small><br />
+
+                                            <label for="country_id">country_id</label>
+                                            <select name="country_id" class="form-control" id="country_id" >
+                                                <option value="">--- please select coutnry ---</option>
+                                                @forelse ($countries as $country)
+                                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                                @empty
+                                                    
+                                                @endforelse
+                                            </select>
+                                            <small class="w-100 help-block text-danger error-country_id"></small><br />
+
+                                            
+                                            <label for="factory_id">factory_id</label>
+                                            <select name="factory_id" class="form-control" id="factory_id" >
+                                                <option value="">--- please select factory ---</option>
+                                                @forelse ($factories as $factory)
+                                                    <option value="{{$factory->id}}">{{$factory->name}}</option>
+                                                @empty
+                                                    
+                                                @endforelse
+                                            </select>
+                                            <small class="w-100 help-block text-danger error-factory_id"></small><br />
 
                                             <label for="address">address</label>
                                             <textarea name="address" id="address" class="form-control" cols="30"
@@ -86,7 +116,8 @@
                                 <th>name</th>
                                 <th>code</th>
                                 <th>tell</th>
-                                <th>created at</th>
+                                <th>country</th>
+                                <th>factory</th>
                                 <th> ACTION </th>
                             </tr>
                         </thead>
@@ -107,7 +138,24 @@
                                         <td><input type="text" name="tell" class="form-control"
                                                 value="{{ $customer->tell }}"></td>
                                         <td>
-                                            {{ $customer->created_at->format('Y-m-d') }}
+                                            <select name="country_id" class="form-control" id="country_id" >
+                                                <option value="">--- please select coutnry ---</option>
+                                                @forelse ($countries as $country)
+                                                    <option value="{{$country->id}}" {{( $country->id == $customer->country_id ) ? 'selected' : ''}}>{{$country->name}}</option>
+                                                @empty
+                                                    
+                                                @endforelse
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="factory_id" class="form-control" id="factory_id" >
+                                                <option value="">--- please select factory ---</option>
+                                                @forelse ($factories as $factory)
+                                                    <option value="{{$factory->id}}" {{( $factory->id == $customer->factory_id ) ? 'selected' : ''}}>{{$factory->name}}</option>
+                                                @empty
+                                                    
+                                                @endforelse
+                                            </select>
                                         </td>
 
                                         <td>
