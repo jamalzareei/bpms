@@ -48,21 +48,21 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="name">name</label>
-                                            <input type="text" name="name" class="form-control mb-2" id="name"
+                                            <input type="text" name="name" class="form-control" id="name"
                                                 placeholder="Enter name">
                                             <small class="w-100 help-block text-danger error-name"></small><br />
                                             <label for="code">code</label>
-                                            <input type="text" name="code" class="form-control mb-2" id="code"
+                                            <input type="text" name="code" class="form-control" id="code"
                                                 placeholder="Enter code">
                                             <small class="w-100 help-block text-danger error-code"></small><br />
 
                                             <label for="tell">tell</label>
-                                            <input type="text" name="tell" class="form-control mb-2" id="tell"
+                                            <input type="text" name="tell" class="form-control" id="tell"
                                                 placeholder="Enter tell">
                                             <small class="w-100 help-block text-danger error-tell"></small><br />
 
                                             <label for="address">address</label>
-                                            <textarea name="address" id="address" class="form-control mb-2" cols="30"
+                                            <textarea name="address" id="address" class="form-control" cols="30"
                                                 rows="5" placeholder="Enter address"></textarea>
                                             <small class="w-100 help-block text-danger error-address"></small><br />
 

@@ -134,6 +134,28 @@
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="">
                     <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="saletypes">sale types</span>
+                </a>
+                <ul class="menu-content">
+                    
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.saletypes.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">List sale types </span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.saletypes.list') }}?create=true">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Create sale type </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a class="d-flex align-items-center" href="">
+                    <i data-feather="home"></i>
                     <span class="menu-title text-truncate" data-i18n="factories">factories</span>
                 </a>
                 <ul class="menu-content">
