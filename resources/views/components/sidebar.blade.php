@@ -63,28 +63,7 @@
                 </a>
             </li>
 
-            <li class=" nav-item">
-                <a class="d-flex align-items-center" href="">
-                    <i data-feather="home"></i>
-                    <span class="menu-title text-truncate" data-i18n="PI">PI</span>
-                    {{-- <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span> --}}
-                </a>
-                <ul class="menu-content">
-                    
-                    <li class=" nav-item">
-                        <a class="d-flex align-items-center" href="{{ route('pages.pis.list') }}">
-                            <i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Analytics">List Pis </span>
-                        </a>
-                    </li>
-                    <li class=" nav-item">
-                        <a class="d-flex align-items-center" href="{{ route('pages.pi.create') }}">
-                            <i data-feather="circle"></i>
-                            <span class="menu-item text-truncate" data-i18n="Analytics">Create Pi </span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            
             
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="">
@@ -220,6 +199,28 @@
                 </ul>
             </li>
 
+            <li class=" nav-item">
+                <a class="d-flex align-items-center" href="">
+                    <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="PI">PI</span>
+                    {{-- <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span> --}}
+                </a>
+                <ul class="menu-content">
+                    
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.pis.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">List Pis </span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.pi.create') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Create Pi </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             
 
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>

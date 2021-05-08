@@ -28,12 +28,33 @@ class Customer extends Model
     }
 
     /**
-     * The pis that belong to the Customer
+     * Get all of the pis for the Customer
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function pis()
     {
-        return $this->belongsToMany(Pi::class, 'customer_pi', 'customer_id', 'pi_id');
+        return $this->hasMany(Pi::class);
     }
+
+    /**
+     * Get the factory that owns the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function factory()
+    {
+        return $this->belongsTo(Factory::class);
+    }
+    
+    /**
+     * Get the country that owns the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
 }

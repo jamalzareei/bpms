@@ -17,18 +17,17 @@ class Pi extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'pi_product');
+        return $this->belongsToMany(Product::class, 'pi_products');
     }
 
     /**
-     * The customers that belong to the Pi
+     * Get the customer that owns the Pi
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function customers()
+    public function customer()
     {
-        return $this->belongsToMany(Customer::class, 'customer_pi', 'pi_id', 'customer_id');
+        return $this->belongsTo(Customer::class);
     }
-
 
 }

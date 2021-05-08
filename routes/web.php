@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/customers-list', 'CustomersController@listCustomers')->name('pages.customers.list');
     Route::post('/customer-create', 'CustomersController@addCustomer')->name('pages.customer.create');
     Route::post('/update-customer/{customer_id}', 'CustomersController@updateCustomer')->name('pages.customer.update');
+    Route::get('/customer-details', 'CustomersController@details')->name('pages.customer.details');
 
     Route::get('/products-list', 'ProductsController@listProducts')->name('pages.products.list');
     Route::post('/product-create', 'ProductsController@addProduct')->name('pages.product.create');
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pi-create', 'PisController@addPi')->name('pages.pi.create');
     Route::post('/pi-create', 'PisController@addPiPost')->name('pages.pi.create.post');
+    Route::get('/pi-edit/{pi_id}', 'PisController@editPi')->name('pages.pi.edit');
+    Route::post('/pi-update/{pi_id}', 'PisController@updatePi')->name('pages.pi.update');
     Route::get('/pis-list', 'PisController@listPis')->name('pages.pis.list');
     Route::post('/pi-add-customers-or-products', 'PisController@addCustomersOrProducts')->name('pages.pi.add.customers.products');
     Route::get('/pi-show/{id}', 'PisController@showPi')->name('pages.pi.show');

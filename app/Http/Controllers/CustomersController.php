@@ -93,4 +93,14 @@ class CustomersController extends Controller
             'autoRedirect' => route('pages.customers.list')
         ], 200);
     }
+
+    public function details(Request $request)
+    {
+        # code...
+        $customer = Customer::where('id', $request->customer_id)->with('factory', 'country')->first();
+
+        return response()->json([
+            'customer' => $customer
+        ], 200);
+    }
 }

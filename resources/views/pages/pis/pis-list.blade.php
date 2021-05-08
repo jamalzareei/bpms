@@ -83,9 +83,7 @@
                                     <td>{{ $pi->producing }}</td>
                                     <td>{{ $pi->trucks_factory }}</td>
                                     <td>
-                                        <button class="btn btn-flat-primary waves-effect btn-sm" data-toggle="modal" data-target="#exampleModal" data-pi_id="{{$pi->id}}">
-                                            <i class="fas fa-plus "></i> add customer
-                                            </button>
+                                        {{ $pi->customer->name }}
                                     </td>
                                     <td>
                                         <button class="btn btn-flat-danger waves-effect btn-sm" data-toggle="modal" data-target="#exampleModal" data-pi_id="{{$pi->id}}">
@@ -98,6 +96,10 @@
                                         <a href="{{ route('pages.pi.show', ['id' => $pi->id]) }}"
                                             class="btn btn-flat-success waves-effect" for="form-{{ $pi->id }}"><i
                                                 class="fas fa-eye"></i></a>
+                                                
+                                        <a href="{{ route('pages.pi.edit', ['pi_id' => $pi->id]) }}"
+                                            class="btn btn-flat-info waves-effect" for="form-{{ $pi->id }}"><i
+                                                class="fas fa-edit"></i></a>
 
                                     </td>
                                 </tr>
@@ -146,20 +148,6 @@
                                     </select>
                                 </div>
                                 <small class="w-100 help-block text-danger error-products"></small><br />
-                            </div>
-                            <div class="form-group">                            
-                                <label for="basicInput">Customers</label>
-                                <div class="col-12">
-                                    <select name="customers[]" class="js-example-basic-multiple select2"
-                                        data-placeholder="Select One or more" multiple="multiple" id="customers-form">
-                                        @forelse ($customers as $customer)
-                                            <option value="{{ $customer->id }}" {{($customer->pis->count() > 0) ? 'selected' : ''}}>{{ $customer->name }}</option>
-                                        @empty
-    
-                                        @endforelse
-                                    </select>
-                                </div>
-                                <small class="w-100 help-block text-danger error-customers"></small><br />
                             </div>
                     </div>
                     <div class="modal-footer">

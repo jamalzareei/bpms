@@ -34,18 +34,27 @@ class DashboardController extends Controller
             '));
 
 
-            // return now()->subMonth(12);
+        // return $piInYear;
         $monthPis = Pi::whereBetween('issud_at', [now()->subMonth(12), now()])
             ->orderBy('issud_at')
+            ->select(
+                    'producing' ,
+                    'stock' ,
+                    'booking' ,
+                    'trucks_factory' ,
+                    'trucks_on_way' ,
+                    'trucks_on_border' ,
+                    'trucks_vend_on_way'
+                )
             // ->whereYear('issud_at', $year)
             ->get()
             ->groupBy(function ($val) {
                 return Carbon::parse($val->issud_at)->format('M');
             });
-            // ->groupBy('id');
+        // ->groupBy('id');
 
-            // return $monthPis;
-        
+        // return $monthPis;
+
         $chartData = [];
         $chartCategory = [];
         $row = 0;
@@ -56,15 +65,15 @@ class DashboardController extends Controller
             $sum = 0;
             foreach ($appointments as $appointment) {
                 $sum +=
-                $appointment->producing +
-                $appointment->stock +
-                $appointment->booking +
-                $appointment->trucks_factory +
-                $appointment->trucks_on_way +
-                $appointment->trucks_on_border +
-                $appointment->trucks_vend_on_way;
+                    $appointment->producing +
+                    $appointment->stock +
+                    $appointment->booking +
+                    $appointment->trucks_factory +
+                    $appointment->trucks_on_way +
+                    $appointment->trucks_on_border +
+                    $appointment->trucks_vend_on_way;
             }
-            $chartData[$row]['data'] = [$sum];
+            $chartData[$row]['data'] = [$appointments->count(), $sum];
             $row++;
         }
         // return $chartData;
@@ -110,7 +119,8 @@ class DashboardController extends Controller
         ]);
 
         $pisReserved = Pi::whereNull('deleted_at')
-            ->whereHas('customers', function ($query) {
+            ->where('customer_id', $request->customer_id)
+            ->whereHas('customer', function ($query) {
                 $query
                     ->where('producing', 0)
                     ->where('stock', 0)
@@ -123,7 +133,8 @@ class DashboardController extends Controller
             ->take(10)->get();
 
         $pisLoading = Pi::whereNull('deleted_at')
-            ->whereHas('customers', function ($query) {
+            ->where('customer_id', $request->customer_id)
+            ->whereHas('customer', function ($query) {
                 $query
                     ->where('trucks_factory', '>', 0);
             })
