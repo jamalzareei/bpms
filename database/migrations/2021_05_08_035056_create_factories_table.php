@@ -15,6 +15,7 @@ class CreateFactoriesTable extends Migration
     {
         Schema::create('factories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('country_id')->nullable();
             $table->string('name', 191);
             $table->string('slug', 191);
             $table->string('icon', 191)->nullable();

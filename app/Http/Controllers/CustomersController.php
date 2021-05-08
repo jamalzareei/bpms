@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Customer;
+use App\Models\Factory;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -14,11 +16,16 @@ class CustomersController extends Controller
         
         $customers = Customer::paginate(50);
 
+        $countries = Country::all();
+        $factory = Factory::all();
+
 
         // return $users[0]->roles->pluck('id')->toArray();
         return view('pages.customers.customers-list',[
             'title' => 'Customers list',
             'customers' => $customers,
+            'countries' => $countries,
+            'factory' => $factory,
         ]);
     }
 

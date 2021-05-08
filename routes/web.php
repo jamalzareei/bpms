@@ -62,6 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-currency', 'CurrenciesController@addCurrency')->name('pages.add.currency');
     Route::post('/update-currency/{currency_id}', 'CurrenciesController@updateCurrency')->name('pages.update.currency');
 
+    
+    Route::get('/factories-list', 'FactoriesController@factories')->name('pages.factories.list');
+    Route::post('/add-factory', 'FactoriesController@addFactory')->name('pages.add.factory');
+    Route::post('/update-factory/{factory_id}', 'FactoriesController@updateFactory')->name('pages.update.factory');
+
+
     Route::get('user/create', 'UsersController@create')->name('user.create');
 
     // Route::post('user/login', 'UsersController@login')->name('user.login');
