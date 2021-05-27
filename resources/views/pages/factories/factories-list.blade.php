@@ -41,7 +41,19 @@
                                                 placeholder="Enter code">
                                             <small class="w-100 help-block text-danger error-code"></small><br />
 
-                                            <label for="country_id">country_id</label>
+                                            
+                                            <label for="name">phone number</label>
+                                            <input type="text" name="phone_number" class="form-control " id="phone_number"
+                                                placeholder="Enter phone_number">
+                                            <small class="w-100 help-block text-danger error-phone_number"></small><br />
+
+                                            
+                                            <label for="name">address</label>
+                                            <input type="text" name="address" class="form-control " id="address"
+                                                placeholder="Enter address">
+                                            <small class="w-100 help-block text-danger error-address"></small><br />
+
+                                            {{-- <label for="country_id">country_id</label>
                                             <select name="country_id" class="form-control" id="country_id" >
                                                 <option value="">--- please select coutnry ---</option>
                                                 @forelse ($countries as $country)
@@ -49,7 +61,7 @@
                                                 @empty
                                                     
                                                 @endforelse
-                                            </select>
+                                            </select> --}}
 
                                             <small class="w-100 help-block text-danger error-country_id"></small><br />
                                         </div>
@@ -71,7 +83,7 @@
                             <tr>
                                 <th>name</th>
                                 <th>code</th>
-                                <th>country</th>
+                                <th>tell</th>
                                 <th>created at</th>
                                 <th> ACTION</th>
                             </tr>
@@ -88,16 +100,8 @@
                                                 value="{{ $factory->name }}"></td>
                                         <td><input type="text" class="form-control" name="code"
                                                 value="{{ $factory->code }}"></td>
-                                        <td>
-                                            <select name="country_id" class="form-control" >
-                                                <option value="">--- please select coutnry ---</option>
-                                                @forelse ($countries as $country)
-                                                    <option value="{{$country->id}}" {{($country->id == $factory->country_id) ? 'selected' : ''}}>{{$country->name}}</option>
-                                                @empty
-                                                    
-                                                @endforelse
-                                            </select>
-                                        </td>
+                                        <td><input type="text" class="form-control" name="phone_number"
+                                                    value="{{ $factory->phone_number }}"></td>
                                         <td>
                                             {{ $factory->created_at->format('Y-m-d') }}
                                         </td>

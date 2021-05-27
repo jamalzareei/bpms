@@ -28,6 +28,8 @@ class FactoriesController extends Controller
         $request->validate([
             'name' => 'required',
             'code' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
             'country_id' => 'nullable|exists:countries,id',
         ]);
 
@@ -36,6 +38,7 @@ class FactoriesController extends Controller
             'name' => $request->name,
             // 'icon' => $request->icon,
             'code' => $request->code,
+            'phone_number' => $request->phone_number,
             'address' => $request->address,
 
         ]);
@@ -63,12 +66,14 @@ class FactoriesController extends Controller
         $request->validate([
             'name' => 'required',
             'code' => 'required',
+            'phone_number' => 'required',
             'country_id' => 'nullable|exists:countries,id',
         ]);
         
         $factory = Factory::find($factory_id);
         $factory->name = $request->name;
         $factory->code = $request->code;
+        $factory->phone_number = $request->phone_number;
         $factory->country_id = $request->country_id;
         $factory->save();
 

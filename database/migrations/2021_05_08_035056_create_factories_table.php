@@ -20,6 +20,7 @@ class CreateFactoriesTable extends Migration
             $table->string('slug', 191);
             $table->string('icon', 191)->nullable();
             $table->string('code', 191)->nullable();
+            $table->string('phone_number', 50)->nullable();
             $table->text('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
