@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('country_id')->nullable();
-            $table->bigInteger('factory_id')->nullable();
+            // $table->bigInteger('factory_id')->nullable();
             $table->string('name', 191);
             $table->string('slug', 191);
             $table->string('code', 191);
@@ -25,6 +25,11 @@ class CreateCustomersTable extends Migration
             $table->text('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::create('customer_factory', function (Blueprint $table) {
+            $table->bigInteger('customer_id');
+            $table->bigInteger('factory_id');
         });
     }
 

@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/currencies-list', 'CurrenciesController@currencies')->name('pages.currencies.list');
     Route::post('/add-currency', 'CurrenciesController@addCurrency')->name('pages.add.currency');
     Route::post('/update-currency/{currency_id}', 'CurrenciesController@updateCurrency')->name('pages.update.currency');
+    Route::get('/currency-details', 'CurrenciesController@details')->name('pages.currency.details');
 
     
     Route::get('/saletypes-list', 'SaletypesController@saletypes')->name('pages.saletypes.list');
@@ -73,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/factories-list', 'FactoriesController@factories')->name('pages.factories.list');
     Route::post('/add-factory', 'FactoriesController@addFactory')->name('pages.add.factory');
     Route::post('/update-factory/{factory_id}', 'FactoriesController@updateFactory')->name('pages.update.factory');
+    Route::get('/factory-details', 'FactoriesController@details')->name('pages.factory.details');
 
 
     Route::get('user/create', 'UsersController@create')->name('user.create');

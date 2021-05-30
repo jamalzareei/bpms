@@ -37,7 +37,7 @@ class CustomersController extends Controller
         $request->validate([
             'username'=> 'nullable|exists:users,username',
             'country_id'=> 'required',
-            'factory_id'=> 'required',
+            // 'factory_id'=> 'required',
             'code'=> 'required',
             'name'=> 'required',
             'tell'=> 'required|min:10',
@@ -49,7 +49,7 @@ class CustomersController extends Controller
         $customer  = Customer::create([
             'user_id' => $user->id ?? null,
             'country_id' => $request->country_id,
-            'factory_id' => $request->factory_id,
+            // 'factory_id' => $request->factory_id,
             'name' => $request->name,
             'code' => $request->code,
             'tell' => $request->tell,
@@ -72,7 +72,7 @@ class CustomersController extends Controller
         $request->validate([
             'username'=> 'nullable|exists:users,username',
             'country_id'=> 'required',
-            'factory_id'=> 'required',
+            // 'factory_id'=> 'required',
             'code'=> 'required',
             'name'=> 'required',
             'tell'=> 'required|min:10',
@@ -80,7 +80,7 @@ class CustomersController extends Controller
 
         $customer  = Customer::where('id', $customer_id)->update([
             'country_id' => $request->country_id,
-            'factory_id' => $request->factory_id,
+            // 'factory_id' => $request->factory_id,
             'name' => $request->name,
             'code' => $request->code,
             'tell' => $request->tell,

@@ -73,4 +73,15 @@ class CurrenciesController extends Controller
             'data' => $currency,
         ], 200);
     }
+
+    
+    public function details(Request $request)
+    {
+        # code...
+        $currency = Currency::where('id', $request->currency_id)->first();
+
+        return response()->json([
+            'currency' => $currency
+        ], 200);
+    }
 }

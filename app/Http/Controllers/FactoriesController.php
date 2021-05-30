@@ -83,4 +83,14 @@ class FactoriesController extends Controller
             'data' => $factory,
         ], 200);
     }
+    
+    public function details(Request $request)
+    {
+        # code...
+        $factory = Factory::where('id', $request->factory_id)->first();
+
+        return response()->json([
+            'factory' => $factory
+        ], 200);
+    }
 }

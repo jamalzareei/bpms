@@ -57,4 +57,14 @@ class Customer extends Model
         return $this->belongsTo(Country::class);
     }
 
+    /**
+     * The factories that belong to the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function factories()
+    {
+        return $this->belongsToMany(Factory::class);
+    }
+
 }

@@ -80,7 +80,7 @@
                                             <small class="w-100 help-block text-danger error-country_id"></small><br />
 
                                             
-                                            <label for="factory_id">factory_id</label>
+                                            {{-- <label for="factory_id">factory_id</label>
                                             <select name="factory_id" class="form-control" id="factory_id" >
                                                 <option value="">--- please select factory ---</option>
                                                 @forelse ($factories as $factory)
@@ -89,7 +89,7 @@
                                                     
                                                 @endforelse
                                             </select>
-                                            <small class="w-100 help-block text-danger error-factory_id"></small><br />
+                                            <small class="w-100 help-block text-danger error-factory_id"></small><br /> --}}
 
                                             <label for="address">address</label>
                                             <textarea name="address" id="address" class="form-control" cols="30"
@@ -117,7 +117,7 @@
                                 <th>code</th>
                                 <th>tell</th>
                                 <th>country</th>
-                                <th>factory</th>
+                                {{-- <th>factory</th> --}}
                                 <th> ACTION </th>
                             </tr>
                         </thead>
@@ -147,7 +147,7 @@
                                                 @endforelse
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <select name="factory_id" class="form-control" id="factory_id" >
                                                 <option value="">--- please select factory ---</option>
                                                 @forelse ($factories as $factory)
@@ -156,7 +156,7 @@
                                                     
                                                 @endforelse
                                             </select>
-                                        </td>
+                                        </td> --}}
 
                                         <td>
 

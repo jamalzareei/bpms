@@ -50,6 +50,58 @@
         })
     })
 
+    
+    $(document).on('change', '#factory_id', function(e){
+        e.preventDefault();
+        let factory_id = $(this).val() ?? 1;
+        let url = `{{ route('pages.factory.details') }}`;
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            url: url,
+            data: {
+                factory_id: factory_id
+            },
+            beforeSend: function() {
+            },
+            success: function(response) {
+                console.info(response);
+                
+                $('.factory-code').text(response?.factory?.code);
+            },
+            error: function(request, status, error) {
+
+            }
+        })
+    })
+
+     
+    $(document).on('change', '#currency_id', function(e){
+        e.preventDefault();
+        let currency_id = $(this).val() ?? 1;
+        let url = `{{ route('pages.currency.details') }}`;
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            url: url,
+            data: {
+                currency_id: currency_id
+            },
+            beforeSend: function() {
+            },
+            success: function(response) {
+                console.info(response);
+                
+                $('#currency_rate').val(response?.currency?.rate);
+            },
+            error: function(request, status, error) {
+
+            }
+        })
+    })
+
     $(document).on('keyup', '#extra_code', function(e){
         $('.extra-code').text(e.target.value);
     })
@@ -72,14 +124,25 @@
                         @csrf
                         <div class="row">
                             
-                            <div class="col-md-12 col-12">
+                            <div class="col-10">
+                                <label for="#">&nbsp;</label>
                                 <div class="form-group">
                                     <label for="date">PI code : </label>
-                                    <span class="country-code">country code</span> -
-                                    <span class="customer-code">customer code</span> -
-                                    <span class="factory-code">factory code</span> -
-                                    <span class="date-code">date code</span> -
-                                    <span class="extra-code">extra code</span>
+                                    <span class="badge badge-dark">
+
+                                        <span class="country-code">country code</span> -
+                                        <span class="customer-code">customer code</span> -
+                                        <span class="factory-code">factory code</span> -
+                                        <span class="date-code">date code</span> -
+                                        <span class="extra-code"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="#">enter extra code</label>
+                                    <input type="text" id="extra_code" class="form-control" placeholder="extra_code" name="extra_code" />
+                                    <small class="w-100 help-block text-danger error-extra_code"></small>
                                 </div>
                             </div>
                             
@@ -97,18 +160,26 @@
                                     <small class="w-100 help-block text-danger error-customer_id"></small>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-12">
+                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="factory_id">factory</label>
+                                    <select name="factory_id" class="form-control" id="factory_id" >
+                                        <option value="">--- please select factory ---</option>
+                                        @forelse ($factories as $factory)
+                                            <option value="{{$factory->id}}">{{$factory->name}}</option>
+                                        @empty
+                                            
+                                        @endforelse
+                                    </select>
+                                    <small class="w-100 help-block text-danger error-factory_id"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="date">date</label>
                                     <input type="text" id="date"   class="form-control selector" placeholder="date" name="date" />
                                     <small class="w-100 help-block text-danger error-date"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-12">
-                                <div class="form-group">
-                                    <label for="#">enter extra code</label>
-                                    <input type="text" id="extra_code" class="form-control" placeholder="extra_code" name="extra_code" />
-                                    <small class="w-100 help-block text-danger error-extra_code"></small>
                                 </div>
                             </div>
 
@@ -127,7 +198,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 col-12">
+                            {{-- <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="number">number</label>
                                     <input type="text" id="number"   class="form-control" placeholder="number" name="number" />
@@ -141,7 +212,7 @@
                                     <input type="text" id="address"   class="form-control" placeholder="address" name="address" />
                                     <small class="w-100 help-block text-danger error-address"></small>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                             
                             <div class="col-md-6 col-12">
@@ -188,8 +259,8 @@
 
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="issud_at">PI Issud</label>
-                                    <input type="date" id="issud_at"   class="form-control selector" placeholder="PI Issud" name="issud_at" />
+                                    <label for="issud_at">PI Issued</label>
+                                    <input type="date" id="issud_at"   class="form-control selector" placeholder="PI Issued" name="issud_at" />
                                     <small class="w-100 help-block text-danger error-issud_at"></small>
                                 </div>
                             </div>
@@ -203,8 +274,8 @@
                             
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="producing">Itam producing </label>
-                                    <input type="text" id="producing" class="form-control" placeholder="Itam producing " name="producing" />
+                                    <label for="producing">Producing Item </label>
+                                    <input type="text" id="producing" class="form-control" placeholder="Producing Item " name="producing" />
                                     <small class="w-100 help-block text-danger error-producing"></small>
                                 </div>
                             </div>
@@ -238,15 +309,15 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="trucks_on_border">Trucks on the border/part</label>
-                                    <input type="text" id="trucks_on_border" class="form-control" placeholder="Trucks on the border/part" name="trucks_on_border" />
+                                    <label for="trucks_on_border">Trucks on the border/port</label>
+                                    <input type="text" id="trucks_on_border" class="form-control" placeholder="Trucks on the border/port" name="trucks_on_border" />
                                     <small class="w-100 help-block text-danger error-trucks_on_border"></small>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="trucks_vend_on_way">Trucks on vend on the way</label>
-                                    <input type="text" id="trucks_vend_on_way" class="form-control" placeholder="Trucks on the border/part" name="trucks_vend_on_way" />
+                                    <input type="text" id="trucks_vend_on_way" class="form-control" placeholder="Trucks on vend on the way" name="trucks_vend_on_way" />
                                     <small class="w-100 help-block text-danger error-trucks_vend_on_way"></small>
                                 </div>
                             </div>
