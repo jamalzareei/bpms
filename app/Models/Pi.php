@@ -30,4 +30,14 @@ class Pi extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    /**
+     * Get all of the files for the Pi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
+
 }

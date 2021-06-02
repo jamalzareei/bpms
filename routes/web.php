@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/pis-list', 'PisController@listPis')->name('pages.pis.list');
     Route::post('/pi-add-customers-or-products', 'PisController@addCustomersOrProducts')->name('pages.pi.add.customers.products');
     Route::get('/pi-show/{id}', 'PisController@showPi')->name('pages.pi.show');
+    Route::post('/upload-fille-pi/{id}', 'PisController@uploadFile')->name('pages.pi.upload.file');
+    Route::get('/download-file/{id}', 'PisController@downloadFile')->name('pages.pi.download.file');
+    Route::DELETE('/remove-file/{id}', 'PisController@removeFile')->name('pages.pi.remove.file');
 
     
     Route::get('/countries-list', 'CountriesController@countries')->name('pages.countries.list');

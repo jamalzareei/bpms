@@ -64,11 +64,11 @@
                         <thead>
                             <tr>
                                 <th>code</th>
-                                <th>PI Issued</th>
+                                {{-- <th>PI Issued</th>
                                 <th>PI Confirmed</th>
                                 <th>Item Producing</th>
-                                <th>Trucks loading from factory</th>
-                                <th>add Customers</th>
+                                <th>Trucks loading from factory</th> --}}
+                                <th>Customer</th>
                                 <th>add Products</th>
                                 <th> ACTION </th>
                             </tr>
@@ -77,11 +77,11 @@
                             @forelse ($pis as $pi)
                                 <tr>
                                     <td>{{ $pi->code }}</td>
-                                    <td>{{ $pi->issud_at }}</td>
+                                    {{-- <td>{{ $pi->issud_at }}</td>
 
                                     <td>{{ $pi->confirm_at }}</td>
                                     <td>{{ $pi->producing }}</td>
-                                    <td>{{ $pi->trucks_factory }}</td>
+                                    <td>{{ $pi->trucks_factory }}</td> --}}
                                     <td>
                                         {{ $pi->customer->name }}
                                     </td>

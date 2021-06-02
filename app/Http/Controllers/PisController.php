@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Factory;
+use App\Models\File;
 use App\Models\Pi;
 use App\Models\Product;
 use App\Models\SaleType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PisController extends Controller
 {
@@ -86,13 +89,13 @@ class PisController extends Controller
                 'message' => 'code customer not found.',
             ], 200);
         }
-        
+
         DB::table('customer_factory')->updateOrInsert([
             'customer_id' => $customer->id,
             'factory_id' => $factory->id,
-        ],[]);
+        ], []);
         // return $factory;
-        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date));// . '-' . $request->extra_code;
+        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
         $code = $this->createCode($code);
 
         $pi = Pi::create([
@@ -180,7 +183,7 @@ class PisController extends Controller
         ]);
 
         $customer = Customer::where('id', $request->customer_id)->with('factory', 'country')->first();
-        
+
         $factory = Factory::where('id', $request->factory_id)->first();
 
         if (!($customer && $customer->code && $factory && $factory->code && $customer->country && $customer->country->code)) {
@@ -193,10 +196,10 @@ class PisController extends Controller
         DB::table('customer_factory')->updateOrInsert([
             'customer_id' => $customer->id,
             'factory_id' => $factory->id,
-        ],[]);
+        ], []);
 
-        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("dm", strtotime($request->date));// . '-' . $request->extra_code;
-        $code = $this->createCode($code);
+        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
+        $code = $this->createCode($code, $pi_id);
 
 
         $pi = Pi::where('id', $pi_id)->update([
@@ -235,12 +238,12 @@ class PisController extends Controller
         ], 200);
     }
 
-    public function createCode($code)
+    public function createCode($code, $id = null)
     {
         # code...
-        $piCount = Pi::where('code', $code)->count();
-        if($piCount){
-            $code = $code."-".($piCount + 1);
+        $piCount = Pi::where('code', 'like', "$code%")->where('id', '!=', $id)->count();
+        if ($piCount) {
+            $code = $code . "-" . ($piCount + 1);
         }
         return $code;
     }
@@ -287,5 +290,66 @@ class PisController extends Controller
             'data' => $pi,
             // 'autoRedirect' => route('pages.customers.list')
         ], 200);
+    }
+
+    public function uploadFile(Request $request, $id)
+    {
+        # code...
+        // return $request;
+        $request->validate([
+            'fileUpload' => 'required|file|mimes:png,jpg,gif,pdf,doc,docs,xls,xlsx',
+            'title_file' => 'required',
+        ]);
+        $path = 'uploads/pis/';
+        $pathFull = public_path($path);
+        
+        if (!is_dir($pathFull)) {
+            mkdir($pathFull, 0777, true);
+        }
+
+        $uploadedFile = $request->file('fileUpload');
+        if(!$uploadedFile){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'not file select',
+            ], 200);
+        }
+        // $name = sha1(date('YmdHis') . Str::random(40));
+        // $save_name = $name . '.' . $uploadedFile->getClientOriginalExtension();
+
+        // $uploadedFile->move($pathFull, $save_name);
+        $pathFile = Storage::put('pis', $uploadedFile);
+
+        File::create([
+            'pi_id' => $id,
+            'title' => $request->title_file,
+            'path' => $pathFile
+        ]);
+
+        $filesPi = File::where('pi_id', $id)->whereNull('deleted_at')->get();
+        
+        // return $filesPi;
+        return response()->json([
+            // 'message' => $save_name,
+            'view' => view('pages.pis.files.files-uploaded', ['filesPi' => $filesPi])->render()
+        ]);
+
+
+        return $request->all();
+
+    }
+
+    public function downloadFile(Request $request, $id)
+    {
+        # code...
+        $filePi = File::where('id', $id)->whereNull('deleted_at')->first();
+        return Storage::download($filePi->path,  'cp-'.time().'-'.str_replace('/', '-', $filePi->path));
+    }
+    
+    public function removeFile(Request $request, $id)
+    {
+        # code...
+        $filePi = File::where('id', $id)->whereNull('deleted_at')->first();
+        return $filePi;
     }
 }

@@ -19,6 +19,18 @@
             let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(selectedDates[0]);
             let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(selectedDates[0]);
 
+            // $('.date-code').text(da+mo);
+        },
+    });
+    $("#date").flatpickr({
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        onChange: function(selectedDates, dateStr, instance) {
+            
+            let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(selectedDates[0]);
+            let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(selectedDates[0]);
+            let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(selectedDates[0]);
+
             $('.date-code').text(da+mo);
         },
     });

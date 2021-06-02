@@ -54,6 +54,22 @@
                         <span class="badge badge-dark">{{$pi->trucks_vend_on_way}}</span>
                     </li>
                 </ul>
+
+                <div class="p-2">
+                    
+                    <div class="row">
+                        @forelse ($pi->files as $file)
+                        <div class="col-md-2 row-upload-1 border border-3 p-3 text-center">
+                            <a href="{{ route('pages.pi.download.file', ['id'=>$file->id]) }}">
+                                <i class="fas fa-download font-large-2 w-100"></i>
+                                <label class="w-100 mt-50">{{$file->title}}</label>
+                            </a>
+                        </div>
+                        @empty
+                        
+                        @endforelse
+                    </div>
+                </div>
             </div>
         </div>
     </div>
