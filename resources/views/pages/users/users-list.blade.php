@@ -34,13 +34,13 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="basicInput">Full name</label>
-                                            <input type="text" name="name" class="form-control mb-2" id="basicInput"
+                                            <input type="text" name="name" class="form-control" id="basicInput"
                                                 placeholder="Enter full name">
-                                            <small class="w-100 help-block text-danger error-name"></small><br />
+                                            <small class="w-100 help-block text-danger error-name mb-2"></small><br />
                                             <label for="basicInput">Username</label>
-                                            <input type="text" name="username" class="form-control mb-2" id="basicInput"
+                                            <input type="text" name="username" class="form-control" id="basicInput"
                                                 placeholder="Enter username">
-                                            <small class="w-100 help-block text-danger error-username"></small><br />
+                                            <small class="w-100 help-block text-danger error-username mb-2"></small><br />
 
                                             <label for="basicInput">Roles</label>
                                             <select name="roles[]" class="js-example-basic-multiple select2"
@@ -51,11 +51,11 @@
 
                                                 @endforelse
                                             </select>
-                                            <small class="w-100 help-block text-danger error-roles"></small><br />
+                                            <small class="w-100 help-block text-danger error-roles mb-2"></small><br />
 
 
                                             <label for="basic-default-password1">Password</label>
-                                            <div class="input-group input-group-merge form-password-toggle mb-2">
+                                            <div class="input-group input-group-merge form-password-toggle">
                                                 <input type="password" name="password" class="form-control"
                                                     id="basic-default-password1" placeholder="Your Password"
                                                     aria-describedby="basic-default-password1" />
@@ -64,7 +64,7 @@
                                                             data-feather="eye"></i></span>
                                                 </div>
                                             </div>
-                                            <small class="w-100 help-block text-danger error-password"></small><br />
+                                            <small class="w-100 help-block text-danger error-password mb-2"></small><br />
 
                                         </div>
                                     </div>

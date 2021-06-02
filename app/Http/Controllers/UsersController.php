@@ -100,7 +100,7 @@ class UsersController extends Controller
         # code...
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:users,username',
+            'username' => 'required|unique:users,username|regex:/^\S*$/u|alpha_dash',
             'password' => 'required',
             'roles' => 'required',
             'roles.*' => 'required',

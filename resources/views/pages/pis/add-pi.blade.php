@@ -31,7 +31,7 @@
             let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(selectedDates[0]);
             let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(selectedDates[0]);
 
-            $('.date-code').text(da+mo);
+            $('.date-code').text(mo+''+da);
         },
     });
 

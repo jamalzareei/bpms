@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ViewComposers;
+namespace App\Http\View\Composers;
 
 use Illuminate\View\View;
 
@@ -23,7 +23,7 @@ class UserComposer
      */
     public function compose(View $view)
     {
-        $view->with('user', auth()->user());
+        $view->with('userComposer', auth()->user());
     }
     
     public function user(View $view)

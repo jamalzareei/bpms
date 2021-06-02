@@ -24,6 +24,7 @@
                 // $('.date-code').text(da+mo);
             },
         });
+        // $(document).on('change', '#date', function(e) {
         $("#date").flatpickr({
             enableTime: true,
             dateFormat: "Y-m-d H:i",
@@ -33,8 +34,10 @@
                 let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(selectedDates[0]);
                 let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(selectedDates[0]);
 
-                $('.date-code').text(da+mo);
+                $('.date-code').text(mo+''+da);
             },
+            
+            // $('.date-code').text($(this).val());
         });
 
         $(document).on('change', '#customer_id', function(e) {
@@ -238,7 +241,7 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="date">date</label>{{ $pi->date }}
+                                        <label for="date">date</label>
                                         <input type="text" id="date" class="form-control selector" placeholder="date"
                                             name="date" value="{{ $pi->date }}" />
                                         <small class="w-100 help-block text-danger error-date"></small>
