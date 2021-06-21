@@ -264,75 +264,35 @@
                                     <small class="w-100 help-block text-danger error-validity_date"></small>
                                 </div>
                             </div>
+                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="quantity">quantity</label>
+                                    <input type="text" id="quantity" class="form-control" placeholder="quantity" name="quantity" />
+                                    <small class="w-100 help-block text-danger error-quantity"></small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="pallet">pallet</label>
+                                    <input type="number" id="pallet" class="form-control" placeholder="pallet" name="pallet" />
+                                    <small class="w-100 help-block text-danger error-pallet"></small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="truck">truck</label>
+                                    <input type="number" id="truck" class="form-control" placeholder="truck" name="truck" />
+                                    <small class="w-100 help-block text-danger error-truck"></small>
+                                </div>
+                            </div>
 
                             
                             <div class="row w-100 border border-warning m-1">
                             </div>
 
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="issud_at">PI Issued</label>
-                                    <input type="date" id="issud_at"   class="form-control selector" placeholder="PI Issued" name="issud_at" />
-                                    <small class="w-100 help-block text-danger error-issud_at"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="confirm_at">PI confirmed</label>
-                                    <input type="date" id="confirm_at"   class="form-control selector" placeholder="PI confirmed" name="confirm_at" />
-                                    <small class="w-100 help-block text-danger error-confirm_at"></small>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="producing">Producing Item </label>
-                                    <input type="text" id="producing" class="form-control" placeholder="Producing Item " name="producing" />
-                                    <small class="w-100 help-block text-danger error-producing"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="stock">Item in Stock</label>
-                                    <input type="text" id="stock" class="form-control" placeholder="Item in Stock" name="stock" />
-                                    <small class="w-100 help-block text-danger error-stock"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="booking">Trucks booking</label>
-                                    <input type="text" id="booking" class="form-control" placeholder="Trucks booking" name="booking" />
-                                    <small class="w-100 help-block text-danger error-booking"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="trucks_factory">Trucks loading from factory</label>
-                                    <input type="text" id="trucks_factory" class="form-control" placeholder="Trucks loading from factory" name="trucks_factory" />
-                                    <small class="w-100 help-block text-danger error-trucks_factory"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="trucks_on_way">Truck on the way</label>
-                                    <input type="text" id="trucks_on_way" class="form-control" placeholder="Truck on the way" name="trucks_on_way" />
-                                    <small class="w-100 help-block text-danger error-trucks_on_way"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="trucks_on_border">Trucks on the border/port</label>
-                                    <input type="text" id="trucks_on_border" class="form-control" placeholder="Trucks on the border/port" name="trucks_on_border" />
-                                    <small class="w-100 help-block text-danger error-trucks_on_border"></small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="trucks_vend_on_way">Trucks on vend on the way</label>
-                                    <input type="text" id="trucks_vend_on_way" class="form-control" placeholder="Trucks on vend on the way" name="trucks_vend_on_way" />
-                                    <small class="w-100 help-block text-danger error-trucks_vend_on_way"></small>
-                                </div>
-                            </div>
                             
                             <div class="col-12">
                                 <button type="submit" class="btn btn-info mr-1">Submit</button>

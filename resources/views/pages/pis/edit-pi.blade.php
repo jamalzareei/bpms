@@ -37,6 +37,7 @@
                 $('.date-code').text(mo+''+da);
             },
             
+            defaultDate: "{{ $pi->date }}"
             // $('.date-code').text($(this).val());
         });
 
@@ -243,7 +244,7 @@
                                     <div class="form-group">
                                         <label for="date">date</label>
                                         <input type="text" id="date" class="form-control selector" placeholder="date"
-                                            name="date" value="{{ $pi->date }}" />
+                                            name="date" value="{{ $pi->date }}" data-value="{{ $pi->date }}" />
                                         <small class="w-100 help-block text-danger error-date"></small>
                                     </div>
                                 </div>
@@ -287,7 +288,7 @@
                                         <label for="currency_rate">currency rate</label>
                                         <input type="text" id="currency_rate" class="form-control"
                                             placeholder="currency rate" name="currency_rate"
-                                            value="{{ $pi->currency_rate }}" />
+                                            value="{{ round($pi->currency_rate) }}" />
                                         <small class="w-100 help-block text-danger error-currency_rate"></small>
                                     </div>
                                 </div>
@@ -308,6 +309,30 @@
                                             placeholder="validity date" name="validity_date"
                                             value="{{ $pi->validity_date }}" />
                                         <small class="w-100 help-block text-danger error-validity_date"></small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="quantity">quantity</label>
+                                        <input type="text" id="quantity" class="form-control" placeholder="quantity" name="quantity" value="{{ $pi->quantity }}" />
+                                        <small class="w-100 help-block text-danger error-quantity"></small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="pallet">pallet</label>
+                                        <input type="number" id="pallet" class="form-control" placeholder="pallet" name="pallet" value="{{ $pi->pallet }}" />
+                                        <small class="w-100 help-block text-danger error-pallet"></small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="truck">truck</label>
+                                        <input type="number" id="truck" class="form-control" placeholder="truck" name="truck" value="{{ $pi->truck }}" />
+                                        <small class="w-100 help-block text-danger error-truck"></small>
                                     </div>
                                 </div>
 
@@ -349,7 +374,7 @@
                                 </div>
 
 
-                                <div class="row w-100 border border-warning m-1">
+                                {{-- <div class="row w-100 border border-warning m-1">
                                 </div>
 
 
@@ -429,7 +454,7 @@
                                             value="{{ $pi->trucks_vend_on_way }}" />
                                         <small class="w-100 help-block text-danger error-trucks_vend_on_way"></small>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-info mr-1">Submit</button>
