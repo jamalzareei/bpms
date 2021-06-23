@@ -17,6 +17,48 @@
                         <span>PI Code</span>
                         <span class="badge badge-dark">{{$pi->code}}</span>
                     </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Customer</span>
+                        <span class="badge badge-dark">{{$pi->customer_name}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Factory</span>
+                        <span class="badge badge-dark">{{$pi->factory->name}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>date</span>
+                        <span class="badge badge-dark">{{$pi->date}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>sale Type</span>
+                        <span class="badge badge-dark">{{$pi->sale_type_id}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Address</span>
+                        <span class="badge badge-dark">{{$pi->address}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Delivery location</span>
+                        <span class="badge badge-dark">{{$pi->delivery_location}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>quantity</span>
+                        <span class="badge badge-dark">{{$pi->quantity}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>pallet</span>
+                        <span class="badge badge-dark">{{$pi->pallet}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>truck</span>
+                        <span class="badge badge-dark">{{$pi->truck}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>currency</span>
+                        <span class="badge badge-dark">{{$pi->currency_rate}} {{$pi->currency->name}}</span>
+                    </li>
+
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>issued at</span>
                         <span class="badge badge-dark">{{$pi->issud_at}}</span>

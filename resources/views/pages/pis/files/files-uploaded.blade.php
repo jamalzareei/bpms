@@ -1,5 +1,5 @@
 @forelse ($filesPi as $file)
-    <div class="row row-upload-1 border-bottom border-3 py-25" id="item-row-'{{$file->id}}">
+    <div class="row row-upload-1 border-bottom border-3 py-25" id="item-row-{{$file->id}}">
         
         <div class="col-5">
             <label>{{$file->title}}</label>
@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="col-2">
-            <i class="fas fa-minus text-danger" onclick="deleteRow('{{ route('pages.pi.upload.file', ['id' => $file->id]) }}', $file->id)"></i>
+            <i class="fas fa-trash text-danger" onclick="deleteRow('{{ route('pages.pi.remove.file', ['id' => $file->id]) }}', '{{$file->id}}')"></i>
         </div>
     </div>
 @empty

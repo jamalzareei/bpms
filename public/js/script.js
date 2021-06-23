@@ -13,6 +13,14 @@ $(() => {
         }
     });
 
+    window.addEventListener("scroll", function(event) {
+        if (this.scrollY > 10) {
+            $('nav.navbar').addClass('nav-scroll-top')
+        } else {
+            $('nav.navbar').removeClass('nav-scroll-top')
+        }
+    }, false);
+
     $('.bootstrap-tagsinput input').on('keypress', function(e) {
         if (e.keyCode == 13) {
             e.keyCode = 188;
@@ -275,6 +283,7 @@ function deleteRow(url, id) {
             $('tr[row="' + id + '"]').remove();
 
             if ($('#item-row-' + id).length > 0) {
+                $('#item-row-' + id).css({ display: 'none' });
                 $('#item-row-' + id).remove();
             }
 

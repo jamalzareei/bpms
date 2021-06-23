@@ -41,6 +41,7 @@ class CreatePisTable extends Migration
             $table->decimal('trucks_on_way', 12, 2)->nullable();
             $table->decimal('trucks_on_border', 12, 2)->nullable();
             $table->decimal('trucks_vend_on_way', 12, 2)->nullable();
+            $table->timestamp('actived_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

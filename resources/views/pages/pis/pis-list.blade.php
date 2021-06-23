@@ -3,11 +3,13 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<link rel="stylesheet" type="text/css" href="{{('app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
 @stop
 
 
 @section('footer')
-
+    <script src="{{ asset('app-assets/vendors/js/extensions/dataTables.checkboxes.min.js')}}"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
@@ -75,7 +77,7 @@
                         </thead>
                         <tbody>
                             @forelse ($pis as $pi)
-                                <tr>
+                                <tr id="item-row-{{ $pi->id }}">
                                     <td>{{ $pi->code }}</td>
                                     {{-- <td>{{ $pi->issud_at }}</td>
 
@@ -93,14 +95,29 @@
 
                                     <td>
 
-                                        <a href="{{ route('pages.pi.show', ['id' => $pi->id]) }}"
-                                            class="btn btn-flat-success waves-effect" for="form-{{ $pi->id }}"><i
-                                                class="fas fa-eye"></i></a>
+                                        <a href="{{ route('pages.pi.show', ['id' => $pi->id]) }}" 
+                                            class="btn btn-flat-success waves-effect p-0" for="form-{{ $pi->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
                                                 
                                         <a href="{{ route('pages.pi.edit', ['pi_id' => $pi->id]) }}"
-                                            class="btn btn-flat-info waves-effect" for="form-{{ $pi->id }}"><i
+                                            class="btn btn-flat-info waves-effect p-0" for="form-{{ $pi->id }}"><i
                                                 class="fas fa-edit"></i></a>
-
+                                                
+                                        <span onclick="deleteRow('{{ route('pages.pi.remove.pi', ['id' => $pi->id]) }}', '{{$pi->id}}')" href=""
+                                            class="btn btn-flat-danger waves-effect p-0" for="form-{{ $pi->id }}"><i
+                                                class="fas fa-trash"></i></span>
+                                                
+                                        <input type="checkbox" class="custom-control-input" 
+                                            name="actived_at" id="active" {{($pi->actived_at) ? 'checked' : ''}}>
+                                            
+                                            <span class="custom-control- custom-switch  custom-switch-success mr-2 mb-1">
+                                                <input type="checkbox" class="custom-control-input" name="actived_at" id="checkbox{{$pi->id}}" {{ $pi->actived_at ? 'checked' : ''}} onchange="changeStatus('{{route('pages.pi.change.status', ['id'=>$pi->id])}}', this)">
+                                                <label class="custom-control-label" for="checkbox{{$pi->id}}">
+                                                    <span class="switch-text-left">✔</span>
+                                                    <span class="switch-text-right">✘</span>
+                                                </label>
+                                            </span>
                                     </td>
                                 </tr>
                             @empty

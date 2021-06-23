@@ -9,6 +9,7 @@ use App\Models\File;
 use App\Models\Pi;
 use App\Models\Product;
 use App\Models\SaleType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -98,6 +99,9 @@ class PisController extends Controller
         $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
         $code = $this->createCode($code);
 
+        if($request->currency_rate > 0){
+            Currency::where('id', $request->currency_id)->update(['rate'=> $request->currency_rate]);
+        }
         $pi = Pi::create([
             'code' => $code,
             'user_id' => auth()->id(),
@@ -204,6 +208,9 @@ class PisController extends Controller
         $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
         $code = $this->createCode($code, $pi_id);
 
+        if($request->currency_rate > 0){
+            Currency::where('id', $request->currency_id)->update(['rate'=> $request->currency_rate]);
+        }
 
         $pi = Pi::where('id', $pi_id)->update([
             'code' => $code,
@@ -356,6 +363,67 @@ class PisController extends Controller
     {
         # code...
         $filePi = File::where('id', $id)->whereNull('deleted_at')->first();
+        if(!$filePi){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'not exists.',
+            ], 200);
+        }
+
+        $filePi->deleted_at = Carbon::now();
+        $filePi->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'removed successfully.',
+            // 'autoRedirect' => route('pages.customers.list')
+        ], 200);
         return $filePi;
+    }
+
+    public function changeStatus(Request $request, $id)
+    {
+        # code...
+        // return $request;
+        $pi = Pi::find($id);
+        if(!$pi){
+            return response()->json([
+                'status' => 'error',
+                'title' => '',
+                'message' => 'error.',
+            ], 200);
+        }
+        
+        $pi->actived_at = $request->status === 'true' ? Carbon::now() : null;
+        $pi->save();
+
+        return response()->json([
+            'status' => 'success',
+            'title' => '',
+            'message' => 'changed successfuly',
+        ], 200);
+    }
+
+    public function removePi(Request $request, $id)
+    {
+        # code...
+        $pi = Pi::find($id);
+        if(!$pi){
+            return response()->json([
+                'status' => 'error',
+                'title' => '',
+                'message' => 'error.',
+            ], 200);
+        }
+
+        $pi->deleted_at = Carbon::now();// $request->deleted_at ? Carbon::now() : null;
+        $pi->save();
+
+        // return back();
+
+        return response()->json([
+            'status' => 'success',
+            'title' => '',
+            'message' => 'removed successfuly',
+        ], 200);
     }
 }

@@ -113,3 +113,9 @@ a {
 .table-responsive.responsive-overflow {
     overflow-x: inherit !important;
 }
+
+.nav-scroll-top {
+    margin: 0 !important;
+    width: calc(100vw - (100vw - 100%) - calc(2rem * 0) - 260px) !important;
+    border-radius: 0 !important;
+}

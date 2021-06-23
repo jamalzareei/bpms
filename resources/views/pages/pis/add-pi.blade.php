@@ -5,9 +5,23 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/pickers/form-pickadate.min.css')}}">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @stop
 
 @section('footer')
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+    <script>
+        $('select').selectpicker();
+
+    </script>
+    
 <script src="{{asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
 <script>
     $(".selector").flatpickr({
@@ -161,7 +175,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="customer_id">customer</label>
-                                    <select name="customer_id" class="form-control" id="customer_id" >
+                                    <select name="customer_id" class="form-control" id="customer_id"  data-live-search="true">
                                         <option value="">--- please select customer ---</option>
                                         @forelse ($customers as $customer)
                                             <option value="{{$customer->id}}">{{$customer->name}}</option>
@@ -176,7 +190,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="factory_id">factory</label>
-                                    <select name="factory_id" class="form-control" id="factory_id" >
+                                    <select name="factory_id" class="form-control" id="factory_id"  data-live-search="true">
                                         <option value="">--- please select factory ---</option>
                                         @forelse ($factories as $factory)
                                             <option value="{{$factory->id}}">{{$factory->name}}</option>
@@ -198,7 +212,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="saletype_id">sale type</label>
-                                    <select name="saletype_id" class="form-control" id="saletype_id" >
+                                    <select name="saletype_id" class="form-control" id="saletype_id"  data-live-search="true">
                                         <option value="">--- please select sale type ---</option>
                                         @forelse ($saletypes as $saletype)
                                             <option value="{{$saletype->id}}">{{$saletype->name}}</option>
@@ -230,7 +244,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="currency_id">currency</label>
-                                    <select name="currency_id" class="form-control" id="currency_id" >
+                                    <select name="currency_id" class="form-control" id="currency_id" data-live-search="true" >
                                         <option value="">--- please select currency ---</option>
                                         @forelse ($currencies as $currency)
                                             <option value="{{$currency->id}}">{{$currency->name}}</option>

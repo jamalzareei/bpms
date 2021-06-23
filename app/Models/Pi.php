@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\Deleted;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,12 @@ class Pi extends Model
     use HasFactory;
     protected $guarded = [];
 
+    
+    protected static function booted()
+    {
+        static::addGlobalScope(new Deleted());
+    }
+    
     /**
      * The products that belong to the Pi
      *
@@ -40,4 +47,23 @@ class Pi extends Model
         return $this->hasMany(File::class);
     }
 
+    /**
+     * Get the factory that owns the Pi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function factory()
+    {
+        return $this->belongsTo(Factory::class);
+    }
+    
+    /**
+     * Get the currency that owns the Pi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 }

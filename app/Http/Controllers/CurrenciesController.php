@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Currency;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CurrenciesController extends Controller
@@ -27,6 +28,8 @@ class CurrenciesController extends Controller
             // 'code' => 'required',
             'rate' => 'nullable|numeric',
         ]);
+
+        Currency::where('name', $request->name)->update(['deleted_at'=> Carbon::now()]);
 
         $currency = Currency::create([
             'name' => $request->name,
