@@ -14,7 +14,7 @@
             <div class="card card-company-table">
                 <div class="table-responsive">
                     <div class="list-group">
-                        <a class="list-group-item active">Suppliers </a>
+                        <a class="list-group-item active">Customers </a>
                         @forelse ($customers as $customer)
 
                             <a onclick="getPis('{{ route('pages.dashboard.get.pis') }}','{{ $customer->id }}')"
@@ -50,7 +50,7 @@
                     <div class="list-group">
                         <a class="list-group-item active">Reserved </a>
                         <section id="loadReserved">
-                            <a class="list-group-item list-group-item-action">Please select one of the suppliers</a>
+                            <a class="list-group-item list-group-item-action">Please select one of the Customers</a>
                         </section>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="list-group">
                         <a class="list-group-item active">loading </a>
                         <section id="loadLoading">
-                            <a class="list-group-item list-group-item-action">Please select one of the suppliers</a>
+                            <a class="list-group-item list-group-item-action">Please select one of the Customers</a>
                         </section>
                     </div>
                 </div>

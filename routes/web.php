@@ -90,6 +90,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-country', 'CountriesController@addCountry')->name('pages.add.country');
     Route::post('/update-country/{country_id}', 'CountriesController@updateCountry')->name('pages.update.country');
 
+    Route::get('/delivery-location-list', 'DeliveryLocationController@deliveryLocation')->name('pages.delivery.location.list');
+    Route::post('/add-delivery-location', 'DeliveryLocationController@addDeliveryLocation')->name('pages.add.delivery.location');
+    Route::post('/update-delivery-location/{deliverylocation_id}', 'DeliveryLocationController@updateDeliveryLocation')->name('pages.update.delivery.location');
+    Route::DELETE('/remove-delivery-location/{deliverylocation_id}', 'DeliveryLocationController@removeDeliveryLocation')->name('pages.remove.delivery.location');
     
     Route::get('/currencies-list', 'CurrenciesController@currencies')->name('pages.currencies.list');
     Route::post('/add-currency', 'CurrenciesController@addCurrency')->name('pages.add.currency');
