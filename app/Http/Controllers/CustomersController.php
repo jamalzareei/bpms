@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Models\Factory;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,13 @@ class CustomersController extends Controller
             'address' => $request->address,
 
         ]);
-
+        
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $user->id,
+            'title' => 'add to customers',
+            'message' => 'You added to Customers',
+        ]);
         
         return response()->json([
             'status' => 'success',
@@ -78,12 +85,21 @@ class CustomersController extends Controller
             'tell'=> 'required|min:10',
         ]);
 
-        $customer  = Customer::where('id', $customer_id)->update([
-            'country_id' => $request->country_id,
-            // 'factory_id' => $request->factory_id,
-            'name' => $request->name,
-            'code' => $request->code,
-            'tell' => $request->tell,
+        $customer  = Customer::find('id');
+        
+        
+        $customer->country_id = $request->country_id;
+        $customer->name = $request->name;
+        $customer->code = $request->code;
+        $customer->tell = $request->tell;
+        $customer->save();
+
+        
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $customer->user_id,
+            'title' => 'update to customers',
+            'message' => 'Your data customer updateed',
         ]);
         
         return response()->json([

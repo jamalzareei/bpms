@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -115,6 +116,13 @@ class UsersController extends Controller
         if($request->roles){
             $user->roles()->sync($request->roles);
         }
+
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $user->id,
+            'title' => 'add to panel',
+            'message' => 'You added to panel',
+        ]);
 
         session()->put('noty', [
             'title' => '',

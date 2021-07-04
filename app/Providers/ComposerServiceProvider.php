@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Notification;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -25,11 +26,13 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        
+        // dd(Notification::where('user_id', auth()->id())->paginate(5));
+        // dd(auth()->user());
         View::share('userComposer', auth()->user());
         
         View::composer('*', function($view) {
             $view->with('userComposer', auth()->user());
+            $view->with('notifications', Notification::where('user_id', auth()->id())->whereNull('readed_at')->with('user')->paginate(5));
             // dd($userComposer);
             // $camper = \App\Camper::where('email', Auth::user()->email)->first();
         });

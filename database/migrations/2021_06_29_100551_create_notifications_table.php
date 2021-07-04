@@ -19,6 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->bigInteger('user_id');
             $table->string('title', 191);
             $table->text('message');
+            $table->timestamp('readed_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,6 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         # code...
+        // return \App\Models\Notification::where('user_id', auth()->id())->whereNull('readed_at')->paginate(5);
 
         $customers = Customer::select('id', 'name')->with(['pis' => function ($query) {
             $query->select('id');

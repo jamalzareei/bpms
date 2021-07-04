@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\DeliveryLocation;
 use App\Models\Factory;
 use App\Models\File;
+use App\Models\Notification;
 use App\Models\Pi;
 use App\Models\Product;
 use App\Models\SaleType;
@@ -143,6 +144,12 @@ class PisController extends Controller
 
         ]);
 
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $customer->user_id,
+            'title' => 'add new PI',
+            'message' => "add PI with your customer data with code $code.",
+        ]);
 
 
         return response()->json([
@@ -263,6 +270,12 @@ class PisController extends Controller
 
         ]);
 
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $customer->user_id,
+            'title' => 'update PI',
+            'message' => "update PI with code: $code.",
+        ]);
 
         return response()->json([
             'status' => 'success',

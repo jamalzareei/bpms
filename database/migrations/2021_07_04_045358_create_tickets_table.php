@@ -15,6 +15,11 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->string("title");
+            $table->bigInteger("user_id");
+            $table->bigInteger("ticket_id");
+            $table->bigInteger("ticket_id");
+            $table->bigInteger("priority_id"); // 1: ziad, 2:motavaset, 3:kam
             $table->timestamps();
         });
     }
