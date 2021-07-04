@@ -56,6 +56,16 @@ class Pi extends Model
     {
         return $this->belongsTo(Factory::class);
     }
+
+    /**
+     * Get the deliverylocation that owns the Pi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function deliverylocation()
+    {
+        return $this->belongsTo(DeliveryLocation::class, 'delivery_location_id', 'id');
+    }
     
     /**
      * Get the currency that owns the Pi

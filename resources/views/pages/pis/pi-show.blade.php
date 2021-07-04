@@ -40,7 +40,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>Delivery location</span>
-                        <span class="badge badge-dark">{{$pi->delivery_location}}</span>
+                        <span class="badge badge-dark">{{$pi->deliverylocation->name ?? ''}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>quantity</span>

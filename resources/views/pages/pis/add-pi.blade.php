@@ -150,7 +150,7 @@
                         @csrf
                         <div class="row">
                             
-                            <div class="col-10">
+                            <div class="col-12">
                                 <label for="#">&nbsp;</label>
                                 <div class="form-group">
                                     <label for="date">PI code : </label>
@@ -159,18 +159,20 @@
                                         <span class="country-code">country code</span> -
                                         <span class="customer-code">customer code</span> -
                                         <span class="factory-code">factory code</span> -
-                                        <span class="date-code">date code</span> -
-                                        <span class="extra-code"></span>
+                                        <span class="date-code">date code</span> 
+                                        {{-- - --}}
+                                        {{-- <span class="extra-code"></span> --}}
                                     </span>
                                 </div>
+                                <small class="w-100 help-block text-danger error-code"></small>
                             </div>
-                            <div class="col-2">
+                            {{-- <div class="col-2">
                                 <div class="form-group">
                                     <label for="#">enter extra code</label>
                                     <input type="text" id="extra_code" class="form-control" placeholder="extra_code" name="extra_code" />
                                     <small class="w-100 help-block text-danger error-extra_code"></small>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
@@ -264,11 +266,25 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-6 col-12">
+                            {{-- <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="delivery_location">delivery_location</label>
                                     <input type="text" id="delivery_location"   class="form-control" placeholder="delivery_location" name="delivery_location" />
                                     <small class="w-100 help-block text-danger error-delivery_location"></small>
+                                </div>
+                            </div> --}}
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="delivery_location_id">delivery location</label>
+                                    <select name="delivery_location_id" class="form-control" id="delivery_location_id"  data-live-search="true">
+                                        <option value="">--- please select delivery location ---</option>
+                                        @forelse ($deliveries as $delivery)
+                                            <option value="{{$delivery->id}}">{{$delivery->name}}</option>
+                                        @empty
+                                            
+                                        @endforelse
+                                    </select>
+                                    <small class="w-100 help-block text-danger error-delivery_location_id"></small>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Currency;
 use App\Models\Customer;
+use App\Models\DeliveryLocation;
 use App\Models\Factory;
 use App\Models\File;
 use App\Models\Pi;
@@ -44,12 +45,14 @@ class PisController extends Controller
         $saletypes = SaleType::all();
         $currencies = Currency::all();
         $factories = Factory::all();
+        $deliveries = DeliveryLocation::all();
         return view('pages.pis.add-pi', [
             'title' => 'Add New Pi',
             'customers' => $customers,
             'saletypes' => $saletypes,
             'currencies' => $currencies,
             'factories' => $factories,
+            'deliveries' => $deliveries,
         ]);
     }
 
@@ -64,7 +67,7 @@ class PisController extends Controller
             'customer_id' => 'required|exists:customers,id',
             'factory_id' => 'required|exists:factories,id',
             'date' => 'required',
-            // 'delivery_location' => 'required',
+            'delivery_location_id' => 'nullable|exists:delivery_locations,id',
             'extra_code' => 'nullable|numeric',
             // 'number' => 'required|numeric',
             // 'address' => 'nullable|min:10',
@@ -97,7 +100,14 @@ class PisController extends Controller
         ], []);
         // return $factory;
         $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
-        $code = $this->createCode($code);
+        
+        $existCode = Pi::where('code', $code)->first();
+        if($existCode){
+            return response()->json([
+                'status' => 'error',
+                'errors' => ['code' => 'PI code used, please change PI code'],
+            ], 422);
+        }
 
         if($request->currency_rate > 0){
             Currency::where('id', $request->currency_id)->update(['rate'=> $request->currency_rate]);
@@ -110,7 +120,7 @@ class PisController extends Controller
             'date' => $request->date,
             'sale_type_id' => $request->saletype_id,
             // 'address' => $request->address,
-            'delivery_location' => $request->delivery_location,
+            'delivery_location_id' => $request->delivery_location_id,
             'customer_name' => $customer->name,
             'customer_name2' => $customer->name,
             // 'number' => $request->number,
@@ -151,6 +161,7 @@ class PisController extends Controller
         $saletypes = SaleType::all();
         $currencies = Currency::all();
         $factories = Factory::all();
+        $deliveries = DeliveryLocation::all();
         return view('pages.pis.edit-pi', [
             'title' => 'update New Pi ' . $pi->code,
             'code' => explode('-', $pi->code),
@@ -159,6 +170,7 @@ class PisController extends Controller
             'saletypes' => $saletypes,
             'currencies' => $currencies,
             'factories' => $factories,
+            'deliveries' => $deliveries,
         ]);
     }
 
@@ -173,7 +185,7 @@ class PisController extends Controller
             'factory_id' => 'required|exists:factories,id',
             'customer_id' => 'required|exists:customers,id',
             'date' => 'required',
-            // 'delivery_location' => 'required',
+            'delivery_location_id' => 'nullable|exists:delivery_locations,id',
             'extra_code' => 'nullable|numeric',
             // 'number' => 'required|numeric',
             // 'address' => 'nullable|min:10',
@@ -206,7 +218,15 @@ class PisController extends Controller
         ], []);
 
         $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
-        $code = $this->createCode($code, $pi_id);
+        // $code = $this->createCode($code, $pi_id);
+        
+        $existCode = Pi::where('code', $code)->where('id', '!=', $pi_id)->first();
+        if($existCode){
+            return response()->json([
+                'status' => 'error',
+                'errors' => ['code' => 'PI code used, please change PI code'],
+            ], 422);
+        }
 
         if($request->currency_rate > 0){
             Currency::where('id', $request->currency_id)->update(['rate'=> $request->currency_rate]);
@@ -220,7 +240,7 @@ class PisController extends Controller
             'date' => $request->date,
             'sale_type_id' => $request->saletype_id,
             // 'address' => $request->address,
-            'delivery_location' => $request->delivery_location,
+            'delivery_location_id' => $request->delivery_location_id,
             'customer_name' => $customer->name,
             'customer_name2' => $customer->name,
             // 'number' => $request->number,
