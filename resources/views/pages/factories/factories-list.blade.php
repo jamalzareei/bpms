@@ -93,7 +93,7 @@
 
                                 <form class="ajaxForm"
                                     action="{{ route('pages.update.factory', ['factory_id' => $factory->id]) }}"
-                                    id="form-{{ $factory->id }}" method="post">
+                                    id="form-{{ $factory->id }}" method="post"  id="item-row-{{ $factory->id }}">
                                     @csrf
                                     <tr>
                                         <td><input type="text" class="form-control" name="name"
@@ -106,9 +106,15 @@
                                             {{ $factory->created_at->format('Y-m-d') }}
                                         </td>
 
-                                        <td>
-                                            <button type="submit" class="btn btn-relief-success"
-                                                for="form-{{ $factory->id }}"><i class="fas fa-edit"></i></button>
+                                        <td>                                            
+                                            <button type="submit" class="btn p-0" for="form-{{ $factory->id }}">
+                                                <i class="fas fa-edit text-info"></i>
+                                            </button>
+                                        
+                                            <button type="submit" class="btn p-0">
+                                                <i onclick="deleteRow('{{ route('pages.remove.factory', ['factory_id' => $factory->id]) }}', '{{$factory->id}}')" 
+                                                    class="fas fa-trash text-danger" ></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </form>

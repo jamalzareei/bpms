@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-factory', 'FactoriesController@addFactory')->name('pages.add.factory');
     Route::post('/update-factory/{factory_id}', 'FactoriesController@updateFactory')->name('pages.update.factory');
     Route::get('/factory-details', 'FactoriesController@details')->name('pages.factory.details');
+    Route::DELETE('/remove-factory/{factory_id}', 'FactoriesController@removeFactory')->name('pages.remove.factory');
 
 
     Route::get('user/create', 'UsersController@create')->name('user.create');

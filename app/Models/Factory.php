@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\Deleted;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,12 @@ class Factory extends Model
     
     protected $guarded = [];
 
+    
+    protected static function booted()
+    {
+        static::addGlobalScope(new Deleted());
+    }
+    
     /**
      * Return the sluggable configuration array for this model.
      *

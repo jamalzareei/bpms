@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Factory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FactoriesController extends Controller
@@ -91,6 +92,21 @@ class FactoriesController extends Controller
 
         return response()->json([
             'factory' => $factory
+        ], 200);
+    }
+    
+    public function removeFactory(Request $request, $factory_id)
+    {
+        # code...
+        
+        $factory = Factory::find($factory_id);
+        $factory->deleted_at = Carbon::now();
+        $factory->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'factory removed successfuly.',
+            'data' => $factory,
         ], 200);
     }
 }
