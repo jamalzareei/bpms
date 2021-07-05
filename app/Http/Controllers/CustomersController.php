@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Factory;
 use App\Models\Notification;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -85,7 +86,7 @@ class CustomersController extends Controller
             'tell'=> 'required|min:10',
         ]);
 
-        $customer  = Customer::find('id');
+        $customer  = Customer::find($customer_id);
         
         
         $customer->country_id = $request->country_id;
@@ -117,6 +118,21 @@ class CustomersController extends Controller
 
         return response()->json([
             'customer' => $customer
+        ], 200);
+    }
+
+    public function removeCustomer(Request $request, $customer_id)
+    {
+        # code...
+        
+        $customer = Customer::find($customer_id);
+        $customer->deleted_at = Carbon::now();
+        $customer->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'customer removed successfuly.',
+            'data' => $customer,
         ], 200);
     }
 }

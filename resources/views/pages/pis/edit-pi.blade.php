@@ -241,10 +241,10 @@
                                     </div>
                                 </div> --}}
 
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="customer_id">customer</label>
-                                        <select name="customer_id" class="form-control" id="customer_id" data-live-search="true">
+                                        <select name="customer_id" class="form-control" id="customer_id" data-live-search="true" disabled>
                                             <option value="">--- please select customer ---</option>
                                             @forelse ($customers as $customer)
                                                 <option value="{{ $customer->id }}"
@@ -257,10 +257,10 @@
                                         <small class="w-100 help-block text-danger error-customer_id"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="factory_id">factory</label>
-                                        <select name="factory_id" class="form-control" id="factory_id"  data-live-search="true">
+                                        <select name="factory_id" class="form-control" id="factory_id"  data-live-search="true" disabled>
                                             <option value="">--- please select factory ---</option>
                                             @forelse ($factories as $factory)
                                                 <option value="{{ $factory->id }}"
@@ -273,29 +273,12 @@
                                         <small class="w-100 help-block text-danger error-factory_id"></small>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="date">date</label>
                                         <input type="text" id="date" class="form-control selector" placeholder="date"
-                                            name="date" value="{{ $pi->date }}" data-value="{{ $pi->date }}" />
+                                            name="date" value="{{ $pi->date }}" data-value="{{ $pi->date }}" disabled />
                                         <small class="w-100 help-block text-danger error-date"></small>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="saletype_id">sale type</label>
-                                        <select name="saletype_id" class="form-control" id="saletype_id"  data-live-search="true">
-                                            <option value="">--- please select sale type ---</option>
-                                            @forelse ($saletypes as $saletype)
-                                                <option value="{{ $saletype->id }}"
-                                                    {{ $pi->sale_type_id == $saletype->id ? 'selected' : '' }}>
-                                                    {{ $saletype->name }}</option>
-                                            @empty
-
-                                            @endforelse
-                                        </select>
-                                        <small class="w-100 help-block text-danger error-saletype_id"></small>
                                     </div>
                                 </div>
 
@@ -323,6 +306,23 @@
                                             placeholder="currency rate" name="currency_rate"
                                             value="{{ round($pi->currency_rate) }}" />
                                         <small class="w-100 help-block text-danger error-currency_rate"></small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="saletype_id">sale type</label>
+                                        <select name="saletype_id" class="form-control" id="saletype_id"  data-live-search="true">
+                                            <option value="">--- please select sale type ---</option>
+                                            @forelse ($saletypes as $saletype)
+                                                <option value="{{ $saletype->id }}"
+                                                    {{ $pi->sale_type_id == $saletype->id ? 'selected' : '' }}>
+                                                    {{ $saletype->name }}</option>
+                                            @empty
+
+                                            @endforelse
+                                        </select>
+                                        <small class="w-100 help-block text-danger error-saletype_id"></small>
                                     </div>
                                 </div>
 

@@ -242,9 +242,9 @@ class PisController extends Controller
         $pi = Pi::where('id', $pi_id)->update([
             'code' => $code,
             'user_id' => auth()->id(),
-            'customer_id' => $request->customer_id,
-            'factory_id' => $request->factory_id,
-            'date' => $request->date,
+            // 'customer_id' => $request->customer_id,
+            // 'factory_id' => $request->factory_id,
+            // 'date' => $request->date,
             'sale_type_id' => $request->saletype_id,
             // 'address' => $request->address,
             'delivery_location_id' => $request->delivery_location_id,

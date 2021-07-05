@@ -67,7 +67,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/customer-create', 'CustomersController@addCustomer')->name('pages.customer.create');
     Route::post('/update-customer/{customer_id}', 'CustomersController@updateCustomer')->name('pages.customer.update');
     Route::get('/customer-details', 'CustomersController@details')->name('pages.customer.details');
-
+    Route::DELETE('/remove-customer/{customer_id}', 'CustomersController@removeCustomer')->name('pages.remove.customer');
+    
     Route::get('/products-list', 'ProductsController@listProducts')->name('pages.products.list');
     Route::post('/product-create', 'ProductsController@addProduct')->name('pages.product.create');
     Route::post('/update-product/{product_id}', 'ProductsController@updateProduct')->name('pages.product.update');

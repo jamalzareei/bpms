@@ -160,8 +160,12 @@
 
                                         <td>
 
-                                            <button type="submit" class="btn btn-relief-success"
-                                                for="form-{{ $customer->id }}"><i class="fas fa-edit"></i></button>
+                                            <button type="submit" class="btn p-0" for="form-{{ $customer->id }}"><i class="fas fa-edit text-info"></i></button>
+                                            
+                                            <button type="submit" class="btn p-0">
+                                                <i onclick="deleteRow('{{ route('pages.remove.customer', ['customer_id' => $customer->id]) }}', '{{$customer->id}}')" 
+                                                    class="fas fa-trash text-danger" ></i>
+                                            </button>
 
                                         </td>
                                     </tr>

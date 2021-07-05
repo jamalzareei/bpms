@@ -174,7 +174,7 @@
                                 </div>
                             </div> --}}
                             
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label for="customer_id">customer</label>
                                     <select name="customer_id" class="form-control" id="customer_id"  data-live-search="true">
@@ -189,7 +189,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label for="factory_id">factory</label>
                                     <select name="factory_id" class="form-control" id="factory_id"  data-live-search="true">
@@ -203,11 +203,34 @@
                                     <small class="w-100 help-block text-danger error-factory_id"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label for="date">date</label>
                                     <input type="text" id="date"   class="form-control selector" placeholder="date" name="date" />
                                     <small class="w-100 help-block text-danger error-date"></small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="currency_id">currency</label>
+                                    <select name="currency_id" class="form-control" id="currency_id" data-live-search="true" >
+                                        <option value="">--- please select currency ---</option>
+                                        @forelse ($currencies as $currency)
+                                            <option value="{{$currency->id}}">{{$currency->name}}</option>
+                                        @empty
+                                            
+                                        @endforelse
+                                    </select>
+                                    <small class="w-100 help-block text-danger error-currency_id"></small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="currency_rate">currency rate</label>
+                                    <input type="text" id="currency_rate"   class="form-control" placeholder="currency rate" name="currency_rate" />
+                                    <small class="w-100 help-block text-danger error-currency_rate"></small>
                                 </div>
                             </div>
 
@@ -242,29 +265,6 @@
                                 </div>
                             </div> --}}
                             
-                            
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="currency_id">currency</label>
-                                    <select name="currency_id" class="form-control" id="currency_id" data-live-search="true" >
-                                        <option value="">--- please select currency ---</option>
-                                        @forelse ($currencies as $currency)
-                                            <option value="{{$currency->id}}">{{$currency->name}}</option>
-                                        @empty
-                                            
-                                        @endforelse
-                                    </select>
-                                    <small class="w-100 help-block text-danger error-currency_id"></small>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="currency_rate">currency rate</label>
-                                    <input type="text" id="currency_rate"   class="form-control" placeholder="currency rate" name="currency_rate" />
-                                    <small class="w-100 help-block text-danger error-currency_rate"></small>
-                                </div>
-                            </div>
                             
                             {{-- <div class="col-md-6 col-12">
                                 <div class="form-group">
