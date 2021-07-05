@@ -101,15 +101,17 @@
                                         <td>
                                             <button type="submit" class="btn p-0" for="form-{{ $delivery->id }}"><i class="fas fa-edit text-info"></i></button>
                                             
-                                            <button type="submit" class="btn p-0">
-                                                <i onclick="deleteRow('{{ route('pages.remove.delivery.location', ['deliverylocation_id' => $delivery->id]) }}', '{{$delivery->id}}')" 
-                                                    class="fas fa-trash text-danger" ></i>
+                                            <button class="btn p-0" onclick="deleteRow('{{ route('pages.remove.delivery.location', ['deliverylocation_id' => $delivery->id]) }}', '{{$delivery->id}}')" >
+                                                <i class="fas fa-trash text-danger" ></i>
                                             </button>
                                         </td>
                                     </tr>
                                 </form>
                             @empty
 
+                            <tr>
+                                <td colspan="4">Not Item for show</td>
+                            </tr>
                             @endforelse
 
                         </tbody>

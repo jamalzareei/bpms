@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SaleType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SaletypesController extends Controller
@@ -62,6 +63,21 @@ class SaletypesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'saletype rolse updated.',
+            'data' => $saletype,
+        ], 200);
+    }
+    
+    public function removeSaletype(Request $request, $saletype_id)
+    {
+        # code...
+        
+        $saletype = SaleType::find($saletype_id);
+        $saletype->deleted_at = Carbon::now();
+        $saletype->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'saletype removed successfuly.',
             'data' => $saletype,
         ], 200);
     }

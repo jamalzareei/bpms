@@ -125,9 +125,9 @@
                             @forelse ($customers as $customer)
                                 <form class="ajaxForm"
                                     action="{{ route('pages.customer.update', ['customer_id' => $customer->id]) }}"
-                                    method="post" id="form-{{ $customer->id }}">
+                                    method="post">
                                     @csrf
-                                    <tr>
+                                    <tr id="form-{{ $customer->id }}">
 
                                         <td><input type="text" name="name" class="form-control"
                                                 value="{{ $customer->name }}"></td>
@@ -162,9 +162,9 @@
 
                                             <button type="submit" class="btn p-0" for="form-{{ $customer->id }}"><i class="fas fa-edit text-info"></i></button>
                                             
-                                            <button type="submit" class="btn p-0">
-                                                <i onclick="deleteRow('{{ route('pages.remove.customer', ['customer_id' => $customer->id]) }}', '{{$customer->id}}')" 
-                                                    class="fas fa-trash text-danger" ></i>
+                                            <button class="btn p-0"  onclick="deleteRow('{{ route('pages.remove.customer', ['customer_id' => $customer->id]) }}', '{{$customer->id}}')" 
+                                                >
+                                                <i class="fas fa-trash text-danger" ></i>
                                             </button>
 
                                         </td>

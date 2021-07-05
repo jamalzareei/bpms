@@ -93,9 +93,9 @@
 
                                 <form class="ajaxForm"
                                     action="{{ route('pages.update.factory', ['factory_id' => $factory->id]) }}"
-                                    id="form-{{ $factory->id }}" method="post"  id="item-row-{{ $factory->id }}">
+                                    id="form-{{ $factory->id }}" method="post" >
                                     @csrf
-                                    <tr>
+                                    <tr id="item-row-{{ $factory->id }}">
                                         <td><input type="text" class="form-control" name="name"
                                                 value="{{ $factory->name }}"></td>
                                         <td><input type="text" class="form-control" name="code"
@@ -111,15 +111,18 @@
                                                 <i class="fas fa-edit text-info"></i>
                                             </button>
                                         
-                                            <button type="submit" class="btn p-0">
-                                                <i onclick="deleteRow('{{ route('pages.remove.factory', ['factory_id' => $factory->id]) }}', '{{$factory->id}}')" 
-                                                    class="fas fa-trash text-danger" ></i>
+                                            <button class="btn p-0" onclick="deleteRow('{{ route('pages.remove.factory', ['factory_id' => $factory->id]) }}', '{{$factory->id}}')" 
+                                                >
+                                                <i class="fas fa-trash text-danger" ></i>
                                             </button>
                                         </td>
                                     </tr>
                                 </form>
                             @empty
 
+                            <tr>
+                                <td colspan="5">Not Item for show</td>
+                            </tr>
                             @endforelse
 
                         </tbody>

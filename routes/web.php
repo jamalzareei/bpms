@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/saletypes-list', 'SaletypesController@saletypes')->name('pages.saletypes.list');
     Route::post('/add-saletype', 'SaletypesController@addSaletype')->name('pages.add.saletype');
     Route::post('/update-saletype/{saletype_id}', 'SaletypesController@updateSaletype')->name('pages.update.saletype');
+    Route::DELETE('/remove-saletype/{saletype_id}', 'SaletypesController@removeSaletype')->name('pages.remove.saletype');
     
     Route::get('/factories-list', 'FactoriesController@factories')->name('pages.factories.list');
     Route::post('/add-factory', 'FactoriesController@addFactory')->name('pages.add.factory');

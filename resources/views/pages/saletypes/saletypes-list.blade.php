@@ -65,7 +65,7 @@
                                     action="{{ route('pages.update.saletype', ['saletype_id' => $saletype->id]) }}"
                                     id="form-{{ $saletype->id }}" method="post">
                                     @csrf
-                                    <tr>
+                                    <tr id="item-row-{{ $saletype->id }}">
                                         <td><input type="text" class="form-control" name="name"
                                                 value="{{ $saletype->name }}"></td>
                                         <td>
@@ -73,13 +73,21 @@
                                         </td>
 
                                         <td>
-                                            <button type="submit" class="btn btn-relief-success"
-                                                for="form-{{ $saletype->id }}"><i class="fas fa-edit"></i></button>
+                                            <button type="submit" class="btn p-0" for="form-{{ $saletype->id }}">
+                                                <i class="fas fa-edit text-info"></i>
+                                            </button>
+                                        
+                                            <button class="btn p-0" onclick="deleteRow('{{ route('pages.remove.saletype', ['saletype_id' => $saletype->id]) }}', '{{$saletype->id}}')" >
+                                                <i class="fas fa-trash text-danger" ></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </form>
                             @empty
 
+                            <tr>
+                                <td colspan="3">Not Item for show</td>
+                            </tr>
                             @endforelse
 
                         </tbody>
