@@ -87,4 +87,19 @@ class CurrenciesController extends Controller
             'currency' => $currency
         ], 200);
     }
+
+    public function removeCurrency(Request $request, $currency_id)
+    {
+        # code...
+        
+        $currency = Currency::find($currency_id);
+        $currency->deleted_at = Carbon::now();
+        $currency->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'currency removed successfuly.',
+            'data' => $currency,
+        ], 200);
+    }
 }

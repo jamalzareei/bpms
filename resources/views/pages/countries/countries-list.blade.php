@@ -90,8 +90,9 @@
                                         </td>
 
                                         <td>
-                                            <button type="submit" class="btn btn-relief-success"
-                                                for="form-{{ $country->id }}"><i class="fas fa-edit"></i></button>
+                                            <button type="submit" class="btn p-0" for="form-{{ $country->id }}">
+                                                <i class="fas fa-edit text-info"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </form>

@@ -71,7 +71,7 @@
                                     action="{{ route('pages.update.currency', ['currency_id' => $currency->id]) }}"
                                     id="form-{{ $currency->id }}" method="post">
                                     @csrf
-                                    <tr>
+                                    <tr id="item-row-{{ $currency->id }}">
                                         <td><input type="text" class="form-control" name="name"
                                                 value="{{ $currency->name }}"></td>
                                         <td><input type="text" class="form-control" name="rate"
@@ -82,8 +82,16 @@
                                         </td>
 
                                         <td>
-                                            <button type="submit" class="btn btn-relief-success"
-                                                for="form-{{ $currency->id }}"><i class="fas fa-edit"></i></button>
+                                            {{-- <button type="submit" class="btn btn-relief-success"
+                                                for="form-{{ $currency->id }}"><i class="fas fa-edit"></i></button> --}}
+                                                
+                                            <button type="submit" class="btn p-0" for="form-{{ $currency->id }}">
+                                                <i class="fas fa-edit text-info"></i>
+                                            </button>
+                                            
+                                            <button class="btn p-0" onclick="deleteRow('{{ route('pages.remove.currency', ['currency_id' => $currency->id]) }}', '{{$currency->id}}')" >
+                                                <i class="fas fa-trash text-danger" ></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </form>

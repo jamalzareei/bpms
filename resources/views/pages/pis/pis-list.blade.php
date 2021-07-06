@@ -85,7 +85,7 @@
                                     <td>{{ $pi->producing }}</td>
                                     <td>{{ $pi->trucks_factory }}</td> --}}
                                     <td>
-                                        {{ $pi->customer->name }}
+                                        {{ $pi->customer->name ?? '' }}
                                     </td>
                                     <td>
                                         <button class="btn btn-flat-danger waves-effect btn-sm" data-toggle="modal" data-target="#exampleModal" data-pi_id="{{$pi->id}}">

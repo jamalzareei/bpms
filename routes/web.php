@@ -100,6 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-currency', 'CurrenciesController@addCurrency')->name('pages.add.currency');
     Route::post('/update-currency/{currency_id}', 'CurrenciesController@updateCurrency')->name('pages.update.currency');
     Route::get('/currency-details', 'CurrenciesController@details')->name('pages.currency.details');
+    Route::DELETE('/remove-currency/{currency_id}', 'CurrenciesController@removeCurrency')->name('pages.remove.currency');
 
     
     Route::get('/saletypes-list', 'SaletypesController@saletypes')->name('pages.saletypes.list');

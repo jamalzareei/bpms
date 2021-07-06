@@ -20,11 +20,11 @@
                     
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>Customer</span>
-                        <span class="badge badge-dark">{{$pi->customer_name}}</span>
+                        <span class="badge badge-dark">{{$pi->customer_name ?? ''}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>Factory</span>
-                        <span class="badge badge-dark">{{$pi->factory->name}}</span>
+                        <span class="badge badge-dark">{{$pi->factory->name ?? ''}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>date</span>
@@ -36,7 +36,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>Address</span>
-                        <span class="badge badge-dark">{{$pi->address}}</span>
+                        <span class="badge badge-dark">{{$pi->customer->address ?? ''}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>Delivery location</span>
@@ -56,7 +56,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>currency</span>
-                        <span class="badge badge-dark">{{$pi->currency_rate}} {{$pi->currency->name}}</span>
+                        <span class="badge badge-dark">{{$pi->currency_rate}} {{$pi->currency->name ?? ''}}</span>
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between align-items-center">
