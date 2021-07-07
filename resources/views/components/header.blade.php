@@ -54,6 +54,15 @@
                     <div class="media-body">
                       {{$not->title}}
                     </div>
+                    <div class="media-right">
+                        <span class="custom-control- custom-switch  custom-switch-success mr-2 mb-1" title="read">
+                          <input type="checkbox" class="custom-control-input" name="actived_at" id="checkbox{{$not->id}}" {{ $not->readed_at ? 'checked' : ''}} onchange="changeStatus('{{route('pages.notification.change.status', ['id'=>$not->id])}}', this)">
+                          <label class="custom-control-label" for="checkbox{{$not->id}}">
+                              <span class="switch-text-left">✔</span>
+                              <span class="switch-text-right">✘</span>
+                          </label>
+                      </span>
+                    </div>
                   </div>
                 </a>
               @empty

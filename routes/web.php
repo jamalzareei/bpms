@@ -114,6 +114,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/factory-details', 'FactoriesController@details')->name('pages.factory.details');
     Route::DELETE('/remove-factory/{factory_id}', 'FactoriesController@removeFactory')->name('pages.remove.factory');
 
+    
+    Route::post('/change-status-notification/{id}', 'NotificationsController@changeStatus')->name('pages.notification.change.status');
 
     Route::get('user/create', 'UsersController@create')->name('user.create');
 

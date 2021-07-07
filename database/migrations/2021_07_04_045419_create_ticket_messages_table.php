@@ -17,10 +17,10 @@ class CreateTicketMessagesTable extends Migration
             $table->id();
             $table->bigInteger("user_id");
             $table->bigInteger("ticket_id");
-            $table->bigInteger("ticket_id");
             $table->text("message");
             $table->text("path")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

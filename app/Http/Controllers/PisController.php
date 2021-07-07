@@ -62,7 +62,7 @@ class PisController extends Controller
         # code...
         // return $request;
         $request->validate([
-            'validity_date' => 'required',
+            // 'validity_date' => 'required',
             'currency_id' => 'required|exists:currencies,id',
             'currency_rate' => 'required|numeric',
             'customer_id' => 'required|exists:customers,id',
@@ -100,7 +100,7 @@ class PisController extends Controller
             'factory_id' => $factory->id,
         ], []);
         // return $factory;
-        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
+        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("dm", strtotime($request->date)); // . '-' . $request->extra_code;
         
         $existCode = Pi::where('code', $code)->first();
         if($existCode){
@@ -128,7 +128,7 @@ class PisController extends Controller
             'quantity' => $request->quantity,
             'pallet' => $request->pallet,
             'truck' => $request->truck,
-            'validity_date' => $request->validity_date,
+            'validity_date' => Carbon::parse($request->date)->addMonth(1),
             'currency_id' => $request->currency_id,
             'currency_rate' => $request->currency_rate,
             'details' => $request->currency_rate,
@@ -186,7 +186,6 @@ class PisController extends Controller
         # code...
         // return $request;
         $request->validate([
-            'validity_date' => 'required',
             'currency_id' => 'required|exists:currencies,id',
             'currency_rate' => 'required|numeric',
             'factory_id' => 'required|exists:factories,id',
@@ -224,7 +223,7 @@ class PisController extends Controller
             'factory_id' => $factory->id,
         ], []);
 
-        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("md", strtotime($request->date)); // . '-' . $request->extra_code;
+        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("dm", strtotime($request->date)); // . '-' . $request->extra_code;
         // $code = $this->createCode($code, $pi_id);
         
         $existCode = Pi::where('code', $code)->where('id', '!=', $pi_id)->first();
@@ -254,7 +253,6 @@ class PisController extends Controller
             'quantity' => $request->quantity,
             'pallet' => $request->pallet,
             'truck' => $request->truck,
-            'validity_date' => $request->validity_date,
             'currency_id' => $request->currency_id,
             'currency_rate' => $request->currency_rate,
             'details' => $request->currency_rate,

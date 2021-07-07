@@ -32,7 +32,7 @@ class ComposerServiceProvider extends ServiceProvider
         
         View::composer('*', function($view) {
             $view->with('userComposer', auth()->user());
-            $view->with('notifications', Notification::where('user_id', auth()->id())->whereNull('readed_at')->with('user')->paginate(5));
+            $view->with('notifications', Notification::where('user_id', auth()->id())->whereNull('readed_at')->with('user')->latest()->paginate(5));
             // dd($userComposer);
             // $camper = \App\Camper::where('email', Auth::user()->email)->first();
         });

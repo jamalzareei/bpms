@@ -287,13 +287,13 @@
                                     <small class="w-100 help-block text-danger error-delivery_location_id"></small>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                            {{-- <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="validity_date">validity date</label>
                                     <input type="text" id="validity_date" class="form-control selector" placeholder="validity date" name="validity_date" />
                                     <small class="w-100 help-block text-danger error-validity_date"></small>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
