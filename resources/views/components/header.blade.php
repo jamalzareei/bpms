@@ -52,7 +52,9 @@
                       <div class="avatar"><img src="https://ui-avatars.com/api/?name={{$not->user->name}}&background=00bfd6" alt="avatar" width="32" height="32"></div>
                     </div>
                     <div class="media-body">
-                      {{$not->title}}
+                      <strong class="w-100">{{$not->title}}</strong>
+                      <br>
+                      <small class="w-100 text-muted font-small-1"> {{$not->message}}</small>
                     </div>
                     <div class="media-right">
                         <span class="custom-control- custom-switch  custom-switch-success mr-2 mb-1" title="read">

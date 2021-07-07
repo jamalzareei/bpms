@@ -320,6 +320,13 @@
                             </div>
 
                             
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="user_access_username">Accessible user (add username)</label>
+                                    <input type="text" id="user_access_username" class="form-control" placeholder="Accessible user" name="user_access_username" value="{{auth()->user()->username}}" />
+                                    <small class="w-100 help-block text-danger error-user_access_username"></small>
+                                </div>
+                            </div>
                             <div class="row w-100 border border-warning m-1">
                             </div>
 

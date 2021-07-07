@@ -100,7 +100,7 @@ class CustomersController extends Controller
             'sender_id' => auth()->id(),
             'user_id' => $customer->user_id,
             'title' => 'update to customers',
-            'message' => 'Your data customer updateed',
+            'message' => 'Your data customer updated',
         ]);
         
         return response()->json([

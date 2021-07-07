@@ -9,8 +9,10 @@ use App\Models\Factory;
 use App\Models\File;
 use App\Models\Notification;
 use App\Models\Pi;
+use App\Models\PiUser;
 use App\Models\Product;
 use App\Models\SaleType;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -83,6 +85,7 @@ class PisController extends Controller
             'trucks_on_border' => 'nullable|numeric',
             'trucks_on_way' => 'nullable|numeric',
             'trucks_vend_on_way' => 'nullable|numeric',
+            'user_access_username' => 'required|exists:users,username'
         ]);
 
         $customer = Customer::where('id', $request->customer_id)->with('country')->first();
@@ -144,6 +147,21 @@ class PisController extends Controller
 
         ]);
 
+        $userAccess = User::where('username', $request->user_access_username)->first();
+        PiUser::create([
+            'user_id' => $userAccess->id,
+            'pi_id' => $pi->id,
+            'sender_id' => auth()->user()->id,
+            'details' => '',
+        ]);
+        
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $userAccess->id,
+            'title' => 'PI was sent to you',
+            'message' => "PI was sent to you. $pi->code.",
+        ]);
+
         Notification::create([
             'sender_id' => auth()->id(),
             'user_id' => $customer->user_id,
@@ -188,9 +206,9 @@ class PisController extends Controller
         $request->validate([
             'currency_id' => 'required|exists:currencies,id',
             'currency_rate' => 'required|numeric',
-            'factory_id' => 'required|exists:factories,id',
-            'customer_id' => 'required|exists:customers,id',
-            'date' => 'required',
+            // 'factory_id' => 'required|exists:factories,id',
+            // 'customer_id' => 'required|exists:customers,id',
+            // 'date' => 'required',
             'delivery_location_id' => 'nullable|exists:delivery_locations,id',
             'extra_code' => 'nullable|numeric',
             // 'number' => 'required|numeric',
@@ -205,41 +223,53 @@ class PisController extends Controller
             'trucks_on_border' => 'nullable|numeric',
             'trucks_on_way' => 'nullable|numeric',
             'trucks_vend_on_way' => 'nullable|numeric',
+            'user_access_username' => 'required|exists:users,username'
         ]);
-
-        $customer = Customer::where('id', $request->customer_id)->with('factory', 'country')->first();
-
-        $factory = Factory::where('id', $request->factory_id)->first();
-
-        if (!($customer && $customer->code && $factory && $factory->code && $customer->country && $customer->country->code)) {
+        
+        $pi = Pi::where('id', $pi_id)->with('useraccess')->first();
+        if($pi && $pi->useraccess && $pi->useraccess->id && auth()->user()->id != $pi->useraccess->user_id){
+            
             return response()->json([
+                'title' => '',
+                'message' => 'You do not have access to this section.',
                 'status' => 'error',
-                'message' => 'code customer not found.',
+                'data' => '',
             ], 200);
         }
 
-        DB::table('customer_factory')->updateOrInsert([
-            'customer_id' => $customer->id,
-            'factory_id' => $factory->id,
-        ], []);
+        // $customer = Customer::where('id', $request->customer_id)->with('factory', 'country')->first();
 
-        $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("dm", strtotime($request->date)); // . '-' . $request->extra_code;
+        // $factory = Factory::where('id', $request->factory_id)->first();
+
+        // if (!($customer && $customer->code && $factory && $factory->code && $customer->country && $customer->country->code)) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'code customer not found.',
+        //     ], 200);
+        // }
+
+        // DB::table('customer_factory')->updateOrInsert([
+        //     'customer_id' => $customer->id,
+        //     'factory_id' => $factory->id,
+        // ], []);
+
+        // $code = $customer->country->code . '-' . $customer->code . '-' . $factory->code . '-' . date("dm", strtotime($request->date)); // . '-' . $request->extra_code;
         // $code = $this->createCode($code, $pi_id);
         
-        $existCode = Pi::where('code', $code)->where('id', '!=', $pi_id)->first();
-        if($existCode){
-            return response()->json([
-                'status' => 'error',
-                'errors' => ['code' => 'PI code used, please change PI code'],
-            ], 422);
-        }
+        // $existCode = Pi::where('code', $code)->where('id', '!=', $pi_id)->first();
+        // if($existCode){
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'errors' => ['code' => 'PI code used, please change PI code'],
+        //     ], 422);
+        // }
 
         if($request->currency_rate > 0){
             Currency::where('id', $request->currency_id)->update(['rate'=> $request->currency_rate]);
         }
 
-        $pi = Pi::where('id', $pi_id)->update([
-            'code' => $code,
+        Pi::where('id', $pi_id)->update([
+            // 'code' => $code,
             'user_id' => auth()->id(),
             // 'customer_id' => $request->customer_id,
             // 'factory_id' => $request->factory_id,
@@ -247,8 +277,8 @@ class PisController extends Controller
             'sale_type_id' => $request->saletype_id,
             // 'address' => $request->address,
             'delivery_location_id' => $request->delivery_location_id,
-            'customer_name' => $customer->name,
-            'customer_name2' => $customer->name,
+            // 'customer_name' => $customer->name,
+            // 'customer_name2' => $customer->name,
             // 'number' => $request->number,
             'quantity' => $request->quantity,
             'pallet' => $request->pallet,
@@ -265,14 +295,29 @@ class PisController extends Controller
             'trucks_on_way' => $request->trucks_on_way,
             'trucks_on_border' => $request->trucks_on_border,
             'trucks_vend_on_way' => $request->trucks_vend_on_way,
+        ]);
 
+        
+        $userAccess = User::where('username', $request->user_access_username)->first();
+        PiUser::create([
+            'user_id' => $userAccess->id,
+            'pi_id' => $pi->id,
+            'sender_id' => auth()->user()->id,
+            'details' => '',
+        ]);
+        
+        Notification::create([
+            'sender_id' => auth()->id(),
+            'user_id' => $userAccess->id,
+            'title' => 'PI was sent to you',
+            'message' => "PI was sent to you. $pi->code.",
         ]);
 
         Notification::create([
             'sender_id' => auth()->id(),
-            'user_id' => $customer->user_id,
+            'user_id' => $pi->customer->user_id,
             'title' => 'update PI',
-            'message' => "update PI with code: $code.",
+            'message' => "update PI with code: $pi->code.",
         ]);
 
         return response()->json([

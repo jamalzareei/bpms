@@ -76,4 +76,14 @@ class Pi extends Model
     {
         return $this->belongsTo(Currency::class);
     }
+
+    /**
+     * Get all of the useraccess for the Pi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function useraccess()
+    {
+        return $this->hasOne(PiUser::class)->with('user')->latest();//->first();
+    }
 }
