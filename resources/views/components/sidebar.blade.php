@@ -49,6 +49,30 @@
             <li class=" nav-item">
                 <a class="d-flex align-items-center" href="">
                     <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="PI">Pages Ista</span>
+                    {{-- <span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span> --}}
+                </a>
+                <ul class="menu-content">
+                    
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.pages.list') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">List Pages </span>
+                        </a>
+                    </li>
+                    <li class=" nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('pages.page.create') }}">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="Analytics">Create Pi </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            
+            <li class=" nav-item">
+                <a class="d-flex align-items-center" href="">
+                    <i data-feather="home"></i>
                     <span class="menu-title text-truncate" data-i18n="delivery_location">delivery Location</span>
                 </a>
                 <ul class="menu-content">

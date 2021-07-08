@@ -119,6 +119,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('user/create', 'UsersController@create')->name('user.create');
 
+    
+    Route::get('/page-create', 'PagesController@addPage')->name('pages.page.create');
+    Route::get('/pages-list', 'PagesController@pages')->name('pages.pages.list');
+    Route::post('/add-page', 'PagesController@createPage')->name('pages.page.create.post');
+    Route::post('/update-page/{page_id}', 'PagesController@updatePage')->name('pages.update.page');
+    Route::DELETE('/remove-page/{page_id}', 'PagesController@removePage')->name('pages.remove.page');
+
     // Route::post('user/login', 'UsersController@login')->name('user.login');
 
     Route::get('logout', function () {

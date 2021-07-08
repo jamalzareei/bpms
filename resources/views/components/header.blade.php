@@ -1,3 +1,7 @@
+<?php
+$userComposer = auth()->user();
+$notifications = \App\Models\Notification::where('user_id', auth()->id())->whereNull('readed_at')->with('user')->latest()->paginate(5);
+?>
 <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
     <div class="navbar-container d-flex content">
       <div class="bookmark-wrapper d-flex align-items-center">

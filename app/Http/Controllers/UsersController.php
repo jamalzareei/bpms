@@ -84,7 +84,7 @@ class UsersController extends Controller
 
     public function users(Request $request)
     {
-        $users = User::with('roles')->take(1)->get();
+        $users = User::with('roles')->get();
 
         $roles = Role::all();
 

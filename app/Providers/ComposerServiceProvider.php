@@ -28,7 +28,8 @@ class ComposerServiceProvider extends ServiceProvider
         //
         // dd(Notification::where('user_id', auth()->id())->paginate(5));
         // dd(auth()->user());
-        View::share('userComposer', auth()->user());
+        // View::share('userComposer', auth()->user());
+        // View::share('userComposer', Notification::where('user_id', auth()->id())->whereNull('readed_at')->with('user')->latest()->paginate(5));
         
         View::composer('*', function($view) {
             $view->with('userComposer', auth()->user());
